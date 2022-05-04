@@ -5,6 +5,11 @@ module Monolens
     end
     module_function :transform
 
+    def keys(lens)
+      Keys.new(lens)
+    end
+    module_function :keys
+
     def values(lens)
       Values.new(lens)
     end
@@ -14,4 +19,5 @@ module Monolens
   end
 end
 require_relative 'object/transform'
+require_relative 'object/keys'
 require_relative 'object/values'
