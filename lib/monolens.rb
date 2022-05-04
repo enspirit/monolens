@@ -15,6 +15,7 @@ module Monolens
     require_relative 'monolens/core'
     require_relative 'monolens/skip'
     require_relative 'monolens/str'
+    require_relative 'monolens/array'
     require_relative 'monolens/coerce'
 
     def load_file(file)
@@ -23,12 +24,12 @@ module Monolens
 
     def lens(arg)
       case arg
-      when Lens           then arg
-      when Array          then chain(arg)
-      when String, Symbol then leaf_lens(arg)
-      when Hash           then hash_lens(arg)
+      when Lens               then arg
+      when ::Array            then chain(arg)
+      when ::String, ::Symbol then leaf_lens(arg)
+      when ::Hash             then hash_lens(arg)
       else
-        raise Error, "No such lens #{[namespace_name, lens_name].join('.')}"
+        raise Error, "No such lens #{arg} (#{arg.class})"
       end
     end
 
