@@ -2,9 +2,9 @@ module Monolens
   module Lens
     def self.leaf(name)
       case name.to_s
-      when 'strip' then Strip.new
-      when 'upcase' then Upcase.new
-      when 'downcase' then Downcase.new
+      when 'str.strip' then Strip.new
+      when 'str.upcase' then Upcase.new
+      when 'str.downcase' then Downcase.new
       else
         raise ArgumentError, "Unknown lens #{name}"
       end

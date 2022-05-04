@@ -2,5 +2,7 @@
 version: "1.0"
 lenses:
 - transform:
-    firstname: [ upcase ]
-    lastname: [ downcase ]
+    firstname:
+    - str.upcase
+    lastname:
+    - str.downcase
