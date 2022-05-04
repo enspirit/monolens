@@ -1,4 +1,4 @@
-class Monolens
+module Monolens
   module Version
     MAJOR = 2
     MINOR = 7
