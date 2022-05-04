@@ -12,6 +12,8 @@ module Monolens
         @options[:formats].each do |format|
           begin
             return date = ::Date.strptime(arg, format)
+          rescue ArgumentError => ex
+            first_error ||= ex
           rescue ::Date::Error => ex
             first_error ||= ex
           end
