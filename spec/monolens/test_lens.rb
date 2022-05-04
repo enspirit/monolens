@@ -25,12 +25,6 @@ describe Monolens, '.lens' do
     expect(got.call('  foo')).to eql('FOO')
   end
 
-  it 'allows using an :transform Hash and factors a Transform lense' do
-    got = Monolens.lens(transform: { firstname: ['str.strip'] })
-    expect(got).to be_a(Monolens::Core::Transform)
-    expect(got.call(firstname: '  foo')).to eql(firstname: 'foo')
-  end
-
   it 'raises an error if the lens namespace is not known' do
     expect {
       Monolens.lens('nosuchone.tp')

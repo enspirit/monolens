@@ -7,6 +7,16 @@ module Monolens
     end
     attr_reader :options
 
+    def fetch_on(attr, arg)
+      if arg.key?(attr)
+        [ attr, arg[attr] ]
+      elsif arg.key?(attr_s = attr.to_s)
+        [ attr_s, arg[attr_s] ]
+      else
+        [ attr, nil ]
+      end
+    end
+
     def is_string!(arg)
       return if arg.is_a?(::String)
 

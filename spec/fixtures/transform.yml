@@ -1,7 +1,7 @@
 ---
 version: "1.0"
 lenses:
-- transform:
+- object.transform:
     firstname:
     - str.upcase
     lastname:

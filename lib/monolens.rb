@@ -16,6 +16,7 @@ module Monolens
     require_relative 'monolens/skip'
     require_relative 'monolens/str'
     require_relative 'monolens/array'
+    require_relative 'monolens/object'
     require_relative 'monolens/coerce'
 
     def load_file(file)
