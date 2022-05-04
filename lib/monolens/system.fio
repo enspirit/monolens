@@ -5,8 +5,12 @@ Lenses.File = .Monolens::Lens::File <info> {
   lenses: Lens.Chain
 }
 
-Lens = Lens.Leaf|Lens.Chain
+Lens.Chain = .Monolens::Lens::Chain <lenses>
+  [Lens.Transform
+  |Lens.Leaf]
 
-Lens.Chain = .Monolens::Lens::Chain <lenses> [Lens]
+Lens.Transform = .Monolens::Lens::Transform <hash> {
+  transform: { ... : Lens.Chain }
+}
 
 Lens.Leaf = .Monolens::Lens <leaf> String

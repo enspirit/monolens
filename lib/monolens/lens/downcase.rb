@@ -1,12 +1,12 @@
 module Monolens
   module Lens
-    class Upcase
+    class Downcase
       include Lens
 
       def call(arg, *rest)
         is_string!(arg)
 
-        arg.upcase
+        arg.downcase
       end
     end
   end

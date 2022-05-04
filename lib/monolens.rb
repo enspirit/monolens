@@ -3,10 +3,12 @@ require 'yaml'
 module Monolens
   require_relative 'monolens/version'
   require_relative 'monolens/lens'
-  require_relative 'monolens/lens/chain'
   require_relative 'monolens/lens/file'
+  require_relative 'monolens/lens/chain'
+  require_relative 'monolens/lens/transform'
   require_relative 'monolens/lens/strip'
   require_relative 'monolens/lens/upcase'
+  require_relative 'monolens/lens/downcase'
 
   SYSTEM_PATH = ::File.expand_path('monolens/system.fio', __dir__)
 
