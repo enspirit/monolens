@@ -1,14 +1,26 @@
 module Monolens
   module Lens
-    def self.leaf(name)
-      case name.to_s
-      when 'str.strip' then Strip.new
-      when 'str.upcase' then Upcase.new
-      when 'str.downcase' then Downcase.new
+    def self.leaf(arg)
+      name, params = case arg
+      when String then [arg, nil]
+      when Hash   then [arg.keys.first, arg.values.first]
       else
-        raise ArgumentError, "Unknown lens #{name}"
+        raise ArgumentError, "Unknown lens #{arg}"
+      end
+      case name.to_s
+      when 'str.strip' then Str::Strip.new
+      when 'str.upcase' then Str::Upcase.new
+      when 'str.downcase' then Str::Downcase.new
+      when 'coerce.date' then Coerce::Date.new(params)
+      else
+        raise ArgumentError, "Unknown lens #{arg}"
       end
     end
+
+    def initialize(options = {})
+      @options = options
+    end
+    attr_reader :options
 
     def is_string!(arg)
       return if arg.is_a?(String)

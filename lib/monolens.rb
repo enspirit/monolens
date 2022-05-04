@@ -6,9 +6,8 @@ module Monolens
   require_relative 'monolens/lens/file'
   require_relative 'monolens/lens/chain'
   require_relative 'monolens/lens/transform'
-  require_relative 'monolens/lens/strip'
-  require_relative 'monolens/lens/upcase'
-  require_relative 'monolens/lens/downcase'
+  require_relative 'monolens/lens/str'
+  require_relative 'monolens/lens/coerce'
 
   SYSTEM_PATH = ::File.expand_path('monolens/system.fio', __dir__)
 
