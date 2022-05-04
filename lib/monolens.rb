@@ -23,6 +23,10 @@ module Monolens
       Monolens::File.new(YAML.safe_load(::File.read(file)))
     end
 
+    def load_yaml(yaml)
+      Monolens::File.new(YAML.load(yaml))
+    end
+
     def lens(arg)
       case arg
       when Lens               then arg
