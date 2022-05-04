@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://github.com/enspirit/monolens'
   s.license     = 'MIT'
 
-  s.add_dependency "finitio", "~> 0.11"
   s.add_development_dependency "rake", "~> 13"
   s.add_development_dependency "rspec", "~> 3"
   s.add_development_dependency "path", "~> 2"
