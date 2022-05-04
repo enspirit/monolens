@@ -8,10 +8,16 @@ module Monolens
       def call(arg, *rest)
         is_string!(arg)
 
+        date, first_error = nil, nil
         @options[:formats].each do |format|
-          date = ::Date.strptime(arg, format) rescue nil
-          return date if date
+          begin
+            return date = ::Date.strptime(arg, format)
+          rescue ::Date::Error => ex
+            first_error ||= ex
+          end
         end
+
+        raise Monolens::LensError, first_error.message
       end
     end
   end
