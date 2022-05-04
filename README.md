@@ -4,6 +4,16 @@ Monolens implements declarative data transformation
 pipelines. It is inspired by [Project Cambria](https://www.inkandswitch.com/cambria/)
 but is not as ambitious, and is not currently compatible with it.
 
+## Features / Limitations
+
+* Allows defining common data transformations on scalars
+  (e.g. string, dates), objects and arrays.
+* Declarative & language agnostic
+* Safe (no path to code injection)
+
+* Requires ruby >= 2.6
+* There is no validation of lens files for now
+
 ## Example
 
 Given the following input file, say `input.json`:
