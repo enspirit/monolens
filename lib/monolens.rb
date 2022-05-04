@@ -13,6 +13,7 @@ module Monolens
 
     require_relative 'monolens/file'
     require_relative 'monolens/core'
+    require_relative 'monolens/skip'
     require_relative 'monolens/str'
     require_relative 'monolens/coerce'
 
