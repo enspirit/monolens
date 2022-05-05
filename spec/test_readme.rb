@@ -21,7 +21,7 @@ describe "What's said in README" do
     ---
     version: 1.0
     lenses:
-    - map:
+    - array.map:
       - object.transform:
           status:
           - str.upcase

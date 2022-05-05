@@ -37,13 +37,13 @@ The following monolens file, say `lens.yml`
 ---
 version: 1.0
 lenses:
-- map:
-  - object.transform
+- array.map:
+  - object.transform:
       status:
       - str.upcase
       body:
       - str.strip
-  - object.rename
+  - object.rename:
       body: description
 ```
 
@@ -76,7 +76,6 @@ result = lens.call(input)
 ## Available lenses
 
 ```
-core.map          - Apply a lens to each member of an Array
 core.chain        - Applies a chain of lenses to an input value
 
 str.strip         - Remove leading and trailing spaces of an input string
@@ -96,6 +95,7 @@ coerce.datetime   - Coerces the input value to a datetime
 
 array.compact     - Removes null from the input array
 array.join        - Joins values of the input array as a string
+array.map         - Apply a lens to each member of an Array
 ```
 
 ## Public API

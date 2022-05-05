@@ -1,5 +1,5 @@
 module Monolens
-  module Core
+  module Array
     class Map
       include Lens
 

@@ -1,5 +1,7 @@
 ## 0.2.0
 
+* BREAKING: (core.)map moved as array.map, where it belongs
+
 * Add object.select lens.
 * Add array.join lens.
 

@@ -17,7 +17,7 @@ describe Monolens, 'skip.null' do
 
   context 'when used in a Map' do
     subject do
-      Monolens.lens('map' => ['skip.null', 'str.upcase'])
+      Monolens.lens('array.map' => ['skip.null', 'str.upcase'])
     end
 
     it 'maps nils' do
@@ -27,7 +27,7 @@ describe Monolens, 'skip.null' do
 
   context 'when used in a Map, but we want no nils' do
     subject do
-      Monolens.lens(['array.compact', { 'map' => ['skip.null', 'str.upcase'] }])
+      Monolens.lens(['array.compact', { 'array.map' => ['skip.null', 'str.upcase'] }])
     end
 
     it 'works' do
