@@ -89,6 +89,7 @@ object.rename     - Rename some keys of the input object
 object.transform  - Applies specific lenses to specific values of the input object
 object.keys       - Applies a lens to all keys of the input object
 object.values     - Applies a lens to all values of the input object
+object.select     - Builds an object by selecting key/values from the input object
 
 coerce.date       - Coerces the input value to a date
 coerce.datetime   - Coerces the input value to a datetime

@@ -20,6 +20,11 @@ module Monolens
     end
     module_function :values
 
+    def select(lens)
+      Select.new(lens)
+    end
+    module_function :select
+
     Monolens.define_namespace 'object', self
   end
 end
@@ -27,3 +32,4 @@ require_relative 'object/rename'
 require_relative 'object/transform'
 require_relative 'object/keys'
 require_relative 'object/values'
+require_relative 'object/select'

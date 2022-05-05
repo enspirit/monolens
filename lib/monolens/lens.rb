@@ -12,6 +12,8 @@ module Monolens
         [ attr, arg[attr] ]
       elsif arg.key?(attr_s = attr.to_s)
         [ attr_s, arg[attr_s] ]
+      elsif arg.key?(attr_sym = attr.to_sym)
+        [ attr_sym, arg[attr_sym] ]
       else
         [ attr, nil ]
       end
