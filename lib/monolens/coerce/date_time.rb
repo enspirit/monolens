@@ -5,13 +5,19 @@ module Monolens
     class DateTime
       include Lens
 
+      DEFAULT_FORMATS = [
+        nil
+      ]
+
       def call(arg, *rest)
         is_string!(arg)
 
-        date, first_error = nil, nil
-        @options[:formats].each do |format|
+        date = nil
+        first_error = nil
+        formats = @options.fetch(:formats, DEFAULT_FORMATS)
+        formats.each do |format|
           begin
-            return date = ::DateTime.strptime(arg, format)
+            return date = strptime(arg, format)
           rescue ArgumentError => ex
             first_error ||= ex
           rescue ::Date::Error => ex
@@ -20,6 +26,14 @@ module Monolens
         end
 
         raise Monolens::LensError, first_error.message
+      end
+
+      def strptime(arg, format = nil)
+        if format.nil?
+          ::DateTime.strptime(arg)
+        else
+          ::DateTime.strptime(arg, format)
+        end
       end
     end
   end

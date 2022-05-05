@@ -1,27 +1,17 @@
+require_relative 'lens/fetch_support'
+require_relative 'lens/options'
+
 module Monolens
   module Lens
+    include FetchSupport
+
     def initialize(options = {})
-      @options = options.each_with_object({}){|(k,v),memo|
-        memo[k.to_sym] = v
-      }
+      @options = Options.new(options)
     end
     attr_reader :options
 
-    def fetch_on(attr, arg)
-      if arg.key?(attr)
-        [ attr, arg[attr] ]
-      elsif arg.key?(attr_s = attr.to_s)
-        [ attr_s, arg[attr_s] ]
-      elsif arg.key?(attr_sym = attr.to_sym)
-        [ attr_sym, arg[attr_sym] ]
-      else
-        [ attr, nil ]
-      end
-    end
-
     def option(name, default = nil)
-      _, option = fetch_on(name, options)
-      option.nil? ? default : option
+      @options.fetch(name, default)
     end
 
     def is_string!(arg)

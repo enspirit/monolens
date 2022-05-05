@@ -2,5 +2,6 @@
 version: "1.0"
 lenses:
 - object.transform:
-    at:
-    - coerce.date: { formats: [ '%d/%m/%Y', '%Y/%m/%d' ] }
+    defn:
+      at:
+      - coerce.date: { formats: [ '%d/%m/%Y', '%Y/%m/%d' ] }

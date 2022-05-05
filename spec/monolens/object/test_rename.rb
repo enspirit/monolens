@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Monolens, 'object.rename' do
   subject do
-    Monolens.lens('object.rename' => { lastname: :name })
+    Monolens.lens('object.rename' => { defn: { lastname: :name } })
   end
 
   it 'works as expected' do

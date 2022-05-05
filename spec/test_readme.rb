@@ -23,12 +23,14 @@ describe "What's said in README" do
     lenses:
     - array.map:
       - object.transform:
-          status:
-          - str.upcase
-          body:
-          - str.strip
+          defn:
+            status:
+            - str.upcase
+            body:
+            - str.strip
       - object.rename:
-          body: description
+          defn:
+            body: description
     YML
   }
 

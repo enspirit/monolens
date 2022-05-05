@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Monolens, 'object.transform' do
   subject do
-    Monolens.lens('object.transform' => { firstname: 'str.upcase' })
+    Monolens.lens('object.transform' => {
+      defn: { firstname: 'str.upcase' }
+    })
   end
 
   it 'works as expected' do

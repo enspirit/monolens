@@ -16,7 +16,7 @@ describe Monolens, '.lens' do
   it 'preserves options' do
     got = Monolens.lens(:"coerce.date" => { formats: ['%Y'] })
     expect(got).to be_a(Monolens::Coerce::Date)
-    expect(got.options).to eql({ formats: ['%Y'] })
+    expect(got.options.to_h).to eql({ formats: ['%Y'] })
   end
 
   it 'allows using an Array, factors a Chain with coercion recursion' do

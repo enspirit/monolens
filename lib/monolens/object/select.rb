@@ -3,16 +3,11 @@ module Monolens
     class Select
       include Lens
 
-      def initialize(selection)
-        super({})
-        @selection = selection
-      end
-
       def call(arg, *rest)
         is_hash!(arg)
 
         result = {}
-        @selection.each_pair do |new_attr, selector|
+        option(:defn, {}).each_pair do |new_attr, selector|
           is_array = selector.is_a?(::Array)
           is_symbol = false
           values = Array(selector).map do |old_attr|

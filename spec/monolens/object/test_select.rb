@@ -4,8 +4,10 @@ describe Monolens, 'object.select' do
   context 'when using symbols in the definition' do
     subject do
       Monolens.lens('object.select' => {
-        name: [:firstname, :lastname],
-        status: :priority
+        defn: {
+          name: [:firstname, :lastname],
+          status: :priority
+        }
       })
     end
 
@@ -39,8 +41,10 @@ describe Monolens, 'object.select' do
   context 'when using strings in the definition' do
     subject do
       Monolens.lens('object.select' => {
-        'name' => ['firstname', 'lastname'],
-        'status' => 'priority'
+        'defn' => {
+          'name' => ['firstname', 'lastname'],
+          'status' => 'priority'
+        }
       })
     end
 
