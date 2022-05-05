@@ -8,12 +8,12 @@ module Monolens
         @lenses = lenses
       end
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         result = arg
         @lenses.each do |lens|
           done = false
           catch(:skip) do
-            result = lens.call(result, *rest)
+            result = lens.call(result, world)
             done = true
           end
           break unless done

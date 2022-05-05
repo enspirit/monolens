@@ -3,7 +3,7 @@ module Monolens
     class Null
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         throw :skip if arg.nil?
 
         arg

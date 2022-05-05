@@ -3,7 +3,7 @@ module Monolens
     class Mapping
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         option(:values, {}).fetch(arg) do
           raise LensError if option(:fail_if_missing)
 

@@ -8,12 +8,12 @@ module Monolens
         @lens = Monolens.lens(lens)
       end
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_hash!(arg)
 
         dup = arg.dup
         arg.each_pair do |attr, value|
-          dup[attr] = @lens.call(value)
+          dup[attr] = @lens.call(value, world)
         end
         dup
       end

@@ -3,7 +3,7 @@ module Monolens
     class Join
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_array!(arg)
 
         arg.join(option(:separator, ' '))

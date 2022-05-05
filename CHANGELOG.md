@@ -20,6 +20,13 @@
         firstname: name
   ```
 
+* array.map now supports an `on_error` option with possible
+  values `null`, `skip`, `raise` or `handler`. The latter works
+  with an `:error_handler` world entry provided at call time.
+
+  By default, using the handler will skip the current production.
+  A combination can be specified, such as `['handler', 'null']`.
+
 ## 0.2.0 - 2022-05-05
 
 * BREAKING: (core.)map moved as array.map, where it belongs

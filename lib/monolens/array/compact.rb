@@ -3,7 +3,7 @@ module Monolens
     class Compact
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_array!(arg)
 
         arg.compact

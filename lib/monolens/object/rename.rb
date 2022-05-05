@@ -3,7 +3,7 @@ module Monolens
     class Rename
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_hash!(arg)
 
         dup = arg.dup

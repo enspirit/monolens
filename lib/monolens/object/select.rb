@@ -3,7 +3,7 @@ module Monolens
     class Select
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_hash!(arg)
 
         result = {}

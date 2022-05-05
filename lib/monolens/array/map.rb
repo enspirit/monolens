@@ -17,23 +17,37 @@ module Monolens
         @lenses = Monolens.lens(lenses)
       end
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_enumerable!(arg)
 
         result = []
         arg.each do |a|
           begin
-            result << @lenses.call(a)
-          rescue Monolens::Error
-            case option(:on_error, :raise).to_sym
-            when :raise then raise
-            when :null  then result << nil
-            when :skip  then nil
-            end
+            result << @lenses.call(a, world)
+          rescue Monolens::LensError => ex
+            strategy = option(:on_error, :raise)
+            handle_error(strategy, ex, result, world)
           end
         end
         result
       end
+
+      def handle_error(strategy, ex, result, world)
+        strategy = strategy.to_sym unless strategy.is_a?(::Array)
+        case strategy
+        when ::Array
+          strategy.each{|s| handle_error(s, ex, result, world) }
+        when :handler
+          error_handler!(world).call(ex)
+        when :raise
+          raise
+        when :null
+          result << nil
+        when :skip
+          nil
+        end
+      end
+      private :handle_error
     end
   end
 end

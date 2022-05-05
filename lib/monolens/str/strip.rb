@@ -3,7 +3,7 @@ module Monolens
     class Strip
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         arg.to_s.strip
       end
     end

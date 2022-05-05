@@ -3,7 +3,7 @@ module Monolens
     class Downcase
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_string!(arg)
 
         arg.downcase

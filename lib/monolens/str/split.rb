@@ -3,7 +3,7 @@ module Monolens
     class Split
       include Lens
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_string!(arg)
 
         sep = option(:separator)

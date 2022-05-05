@@ -9,7 +9,7 @@ module Monolens
         nil
       ]
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_string!(arg)
 
         date = nil

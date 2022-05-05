@@ -11,13 +11,13 @@ module Monolens
         end
       end
 
-      def call(arg, *rest)
+      def call(arg, world = {})
         is_hash!(arg)
 
         dup = arg.dup
         option(:defn, {}).each_pair do |attr, sub_lens|
           actual_attr, fetched = fetch_on(attr, dup)
-          dup[actual_attr] = sub_lens.call(fetched)
+          dup[actual_attr] = sub_lens.call(fetched, world)
         end
         dup
       end

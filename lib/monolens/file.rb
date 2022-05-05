@@ -2,8 +2,8 @@ module Monolens
   class File
     include Lens
 
-    def call(*args, &bl)
-      option(:lenses, ->(arg){}).call(*args, &bl)
+    def call(arg, world = {})
+      option(:lenses).call(arg, world)
     end
   end
 end
