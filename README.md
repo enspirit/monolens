@@ -95,6 +95,7 @@ coerce.date       - Coerces the input value to a date
 coerce.datetime   - Coerces the input value to a datetime
 
 array.compact     - Removes null from the input array
+array.join        - Joins values of the input array as a string
 ```
 
 ## Public API
