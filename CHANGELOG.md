@@ -21,15 +21,15 @@
   ```
 
 * array.map now supports an `on_error` option with possible
-  values `null`, `skip`, `raise` or `handler`. The latter works
+  values `null`, `skip`, `fail` or `handler`. The latter works
   with an `:error_handler` world entry provided at call time.
 
   By default, using the handler will skip the current production.
   A combination can be specified, such as `['handler', 'null']`.
 
 * object.transform and object.select now support an `on_missing`
-  option with possible values `null`, `skip` or `raise`. Default
-  behavior is to raise an error if the input object lacks a key.
+  option with possible values `null`, `skip` or `fail`. Default
+  behavior is to fail if the input object lacks a key.
 
 ## 0.2.0 - 2022-05-05
 

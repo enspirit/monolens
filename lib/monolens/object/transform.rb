@@ -27,9 +27,9 @@ module Monolens
       end
 
       def on_missing(result, attr)
-        strategy = option(:on_missing, :raise)
+        strategy = option(:on_missing, :fail)
         case strategy.to_sym
-        when :raise
+        when :fail
           raise LensError, "Expected `#{attr}` to be defined"
         when :null
           result[attr] = nil

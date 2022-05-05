@@ -25,7 +25,7 @@ module Monolens
           begin
             result << @lenses.call(a, world)
           rescue Monolens::LensError => ex
-            strategy = option(:on_error, :raise)
+            strategy = option(:on_error, :fail)
             handle_error(strategy, ex, result, world)
           end
         end
@@ -39,7 +39,7 @@ module Monolens
           strategy.each{|s| handle_error(s, ex, result, world) }
         when :handler
           error_handler!(world).call(ex)
-        when :raise
+        when :fail
           raise
         when :null
           result << nil
