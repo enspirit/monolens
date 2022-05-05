@@ -20,9 +20,10 @@
         firstname: name
   ```
 
-* array.map now supports an `on_error` option with possible
-  values `null`, `skip`, `fail` or `handler`. The latter works
-  with an `:error_handler` world entry provided at call time.
+* array.map and object.values now supports an `on_error` option
+  with possible values `null`, `skip`, `fail` or `handler`. The
+  latter works with an `:error_handler` world entry provided at
+  call time.
 
   By default, using the handler will skip the current production.
   A combination can be specified, such as `['handler', 'null']`.
