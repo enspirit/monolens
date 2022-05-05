@@ -69,4 +69,25 @@ describe Monolens, 'object.values' do
       expect(subject.call(input)).to eql(expected)
     end
   end
+
+  context 'with on_error: keep' do
+    subject do
+      Monolens.lens('object.values' => {
+        'on_error' => 'keep',
+        'lenses' => ['str.upcase']
+      })
+    end
+
+    it 'uses nil as value' do
+      input = {
+        firstname: 12,
+        lastname: 'Lambeau'
+      }
+      expected = {
+        firstname: 12,
+        lastname: 'LAMBEAU'
+      }
+      expect(subject.call(input)).to eql(expected)
+    end
+  end
 end

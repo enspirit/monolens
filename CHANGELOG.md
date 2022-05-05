@@ -27,6 +27,9 @@
   latter works with an `:error_handler` world entry provided at
   call time.
 
+  object.values also support a `keep` option that preserves the
+  original value.
+
   By default, using the handler will skip the current production.
   A combination can be specified, such as `['handler', 'null']`.
 
