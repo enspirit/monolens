@@ -4,6 +4,8 @@ module Monolens
       include Lens
 
       def call(arg, world = {})
+        is_string!(arg)
+
         arg.to_s.strip
       end
     end

@@ -1,5 +1,7 @@
 ## 0.3.0
 
+* BREAKING: str.strip fails if input is not a string.
+
 * BREAKING: object.select, object.rename and object.transform
   now expect their selection/renaming/transformation to be
   provided under a `defn` key. This allows for adding options
