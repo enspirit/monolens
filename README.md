@@ -77,6 +77,7 @@ result = lens.call(input)
 
 ```
 core.chain        - Applies a chain of lenses to an input value
+core.mapping      - Converts the input value via a key:value mapping
 
 str.strip         - Remove leading and trailing spaces of an input string
 str.split         - Splits the input string as an array

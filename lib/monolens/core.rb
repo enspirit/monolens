@@ -5,7 +5,13 @@ module Monolens
     end
     module_function :chain
 
+    def mapping(options)
+      Mapping.new(options)
+    end
+    module_function :mapping
+
     Monolens.define_namespace 'core', self
   end
 end
 require_relative 'core/chain'
+require_relative 'core/mapping'
