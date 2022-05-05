@@ -10,8 +10,8 @@ module Monolens
     end
     module_function :join
 
-    def map(lens)
-      Map.new(lens)
+    def map(options)
+      Map.new(options)
     end
     module_function :map
 
