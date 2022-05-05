@@ -24,7 +24,7 @@ module Monolens
     end
 
     def load_yaml(yaml)
-      Monolens::File.new(YAML.load(yaml))
+      Monolens::File.new(YAML.safe_load(yaml))
     end
 
     def lens(arg)

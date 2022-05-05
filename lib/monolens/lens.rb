@@ -19,6 +19,11 @@ module Monolens
       end
     end
 
+    def option(name, default = nil)
+      _, option = fetch_on(name, options)
+      option.nil? ? default : option
+    end
+
     def is_string!(arg)
       return if arg.is_a?(::String)
 

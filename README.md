@@ -79,6 +79,7 @@ result = lens.call(input)
 core.chain        - Applies a chain of lenses to an input value
 
 str.strip         - Remove leading and trailing spaces of an input string
+str.split         - Splits the input string as an array
 str.downcase      - Converts the input string to lowercase
 str.upcase        - Converts the input string to uppercase
 
