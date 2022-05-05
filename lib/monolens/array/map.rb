@@ -45,6 +45,8 @@ module Monolens
           result << nil
         when :skip
           nil
+        else
+          raise Monolens::Error, "Unexpected error strategy `#{strategy}`"
         end
       end
       private :handle_error

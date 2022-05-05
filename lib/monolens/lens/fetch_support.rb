@@ -9,8 +9,10 @@ module Monolens
           [ attr_s, arg[attr_s] ]
         elsif arg.key?(attr_sym = attr.to_sym)
           [ attr_sym, arg[attr_sym] ]
-        else
+        elsif default
           [ attr, default ]
+        else
+          nil
         end
       end
 

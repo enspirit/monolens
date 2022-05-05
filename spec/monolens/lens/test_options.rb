@@ -60,7 +60,7 @@ module Monolens
           end
 
           it 'raises if not found' do
-            expect { subject.fetch('nosuchone') }.to raise_error
+            expect { subject.fetch('nosuchone') }.to raise_error(Monolens::Error)
           end
 
           it 'lets pass a default value' do
