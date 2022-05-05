@@ -1,4 +1,4 @@
-## 0.2.0
+## 0.2.0 - 2022-05-05
 
 * BREAKING: (core.)map moved as array.map, where it belongs
 
