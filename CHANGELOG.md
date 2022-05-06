@@ -24,6 +24,12 @@
 
 * Add coerce.string, aka toString or to_s
 
+* When an error occurs, the LensError class supports a `location`
+  field that tracks the path within the input as an array of
+  parts, e.g. `[0, :firstname]` for an error occuring on the
+  `:firstname` field of the object at position 3 in an array
+  (so 4th object, as positions start at 0 as usual).
+
 * array.map and object.values now supports an `on_error` option
   with possible values `null`, `skip`, `fail` or `handler`. The
   latter works with an `:error_handler` world entry provided at

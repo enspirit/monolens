@@ -56,4 +56,47 @@ describe Monolens, 'object.transform' do
       expect(subject.call(lastname: 'Lambeau')).to eql(firstname: nil, lastname: 'Lambeau')
     end
   end
+
+  describe 'error traceability' do
+    let(:lens) do
+      Monolens.lens({
+        'array.map' => {
+          :lenses => {
+            'object.transform' => {
+              defn: { firstname: 'str.upcase' }
+            }
+          }
+        }
+      })
+    end
+
+    subject do
+      lens.call(input)
+      nil
+    rescue Monolens::LensError => ex
+      ex
+    end
+
+    context 'when missing key' do
+      let(:input) do
+        [{}]
+      end
+
+      it 'correctly updates the location' do
+        expect(subject.location).to eql([0])
+      end
+    end
+
+    context 'when an error down the line' do
+      let(:input) do
+        [{
+          firstname: nil
+        }]
+      end
+
+      it 'correctly updates the location' do
+        expect(subject.location).to eql([0, :firstname])
+      end
+    end
+  end
 end

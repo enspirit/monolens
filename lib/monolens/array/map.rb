@@ -18,15 +18,17 @@ module Monolens
       end
 
       def call(arg, world = {})
-        is_enumerable!(arg)
+        is_enumerable!(arg, world)
 
         result = []
-        arg.each do |a|
-          begin
-            result << @lenses.call(a, world)
-          rescue Monolens::LensError => ex
-            strategy = option(:on_error, :fail)
-            handle_error(strategy, ex, result, world)
+        arg.each_with_index do |a, i|
+          deeper(world, i) do |w|
+            begin
+              result << @lenses.call(a, w)
+            rescue Monolens::LensError => ex
+              strategy = option(:on_error, :fail)
+              handle_error(strategy, ex, result, world)
+            end
           end
         end
         result

@@ -10,7 +10,7 @@ module Monolens
       ]
 
       def call(arg, world = {})
-        is_string!(arg)
+        is_string!(arg, world)
 
         date = nil
         first_error = nil
@@ -25,7 +25,7 @@ module Monolens
           end
         end
 
-        raise Monolens::LensError, first_error.message
+        fail!(first_error.message, world)
       end
 
       def strptime(arg, format = nil)

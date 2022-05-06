@@ -4,7 +4,7 @@ module Monolens
       include Lens
 
       def call(arg, world = {})
-        is_string!(arg)
+        is_string!(arg, world)
 
         arg.downcase
       end

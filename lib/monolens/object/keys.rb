@@ -3,19 +3,17 @@ module Monolens
     class Keys
       include Lens
 
-      def initialize(lens)
-        super({})
-        @lens = Monolens.lens(lens)
-      end
-
       def call(arg, world = {})
-        is_hash!(arg)
+        is_hash!(arg, world)
 
+        lenses = option(:lenses)
         dup = {}
         arg.each_pair do |attr, value|
-          lensed = @lens.call(attr.to_s, world)
-          lensed = lensed.to_sym if lensed && attr.is_a?(Symbol)
-          dup[lensed] = value
+          deeper(world, attr) do |w|
+            lensed = lenses.call(attr, w)
+            lensed = lensed.to_sym if lensed && attr.is_a?(Symbol)
+            dup[lensed] = value
+          end
         end
         dup
       end

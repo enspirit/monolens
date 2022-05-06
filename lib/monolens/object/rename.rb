@@ -4,7 +4,7 @@ module Monolens
       include Lens
 
       def call(arg, world = {})
-        is_hash!(arg)
+        is_hash!(arg, world)
 
         dup = arg.dup
         option(:defn).each_pair do |oldname, newname|

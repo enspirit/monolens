@@ -48,4 +48,29 @@ describe Monolens, 'core.mapping' do
       }.to raise_error(Monolens::LensError)
     end
   end
+
+  describe 'error handling' do
+    let(:lens) do
+      Monolens.lens({
+        'array.map' => {
+          :lenses => {
+            'core.mapping' => mapping.merge('fail_if_missing' => true)
+          }
+        }
+      })
+    end
+
+    subject do
+      begin
+        lens.call(['todo', 'foo'])
+        nil
+      rescue Monolens::LensError => ex
+        ex
+      end
+    end
+
+    it 'sets the location correctly' do
+      expect(subject.location).to eql([1])
+    end
+  end
 end

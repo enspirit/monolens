@@ -90,4 +90,28 @@ describe Monolens, 'object.values' do
       expect(subject.call(input)).to eql(expected)
     end
   end
+
+  describe 'error traceability' do
+    let(:lens) do
+      Monolens.lens('object.values' => ['str.upcase'])
+    end
+
+    subject do
+      lens.call(input)
+      nil
+    rescue Monolens::LensError => ex
+      ex
+    end
+
+    let(:input) do
+      {
+        'firstname' => 'Bernard',
+        'lastname' => nil
+      }
+    end
+
+    it 'correctly updates the location' do
+      expect(subject.location).to eql(['lastname'])
+    end
+  end
 end

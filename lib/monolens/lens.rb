@@ -1,5 +1,6 @@
 require_relative 'lens/fetch_support'
 require_relative 'lens/options'
+require_relative 'lens/location'
 
 module Monolens
   module Lens
@@ -10,8 +11,17 @@ module Monolens
     end
     attr_reader :options
 
+  protected
+
     def option(name, default = nil)
       @options.fetch(name, default)
+    end
+
+    def deeper(world, part)
+      world[:location] ||= Location.new
+      world[:location].deeper(part) do |loc|
+        yield(world.merge(location: loc))
+      end
     end
 
     MISSING_ERROR_HANDLER = <<~TXT
@@ -25,28 +35,33 @@ module Monolens
       raise Monolens::Error, MISSING_ERROR_HANDLER
     end
 
-    def is_string!(arg)
+    def is_string!(arg, world)
       return if arg.is_a?(::String)
 
-      raise Monolens::LensError, "String expected, got #{arg.class}"
+      fail!("String expected, got #{arg.class}", world)
     end
 
-    def is_hash!(arg)
+    def is_hash!(arg, world)
       return if arg.is_a?(::Hash)
 
-      raise Monolens::LensError, "Hash expected, got #{arg.class}"
+      fail!("Hash expected, got #{arg.class}", world)
     end
 
-    def is_enumerable!(arg)
+    def is_enumerable!(arg, world)
       return if arg.is_a?(::Enumerable)
 
-      raise Monolens::LensError, "Enumerable expected, got #{arg.class}"
+      fail!("Enumerable expected, got #{arg.class}", world)
     end
 
-    def is_array!(arg)
+    def is_array!(arg, world)
       return if arg.is_a?(::Array)
 
-      raise Monolens::LensError, "Array expected, got #{arg.class}"
+      fail!("Array expected, got #{arg.class}", world)
+    end
+
+    def fail!(msg, world)
+      location = world[:location]&.to_a || []
+      raise Monolens::LensError.new(msg, location)
     end
   end
 end

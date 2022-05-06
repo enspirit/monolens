@@ -4,16 +4,18 @@ module Monolens
       include Lens
 
       def call(arg, world = {})
-        is_hash!(arg)
+        is_hash!(arg, world)
 
         lenses = option(:lenses)
         result = arg.dup
         arg.each_pair do |attr, value|
-          begin
-            result[attr] = lenses.call(value, world)
-          rescue Monolens::LensError => ex
-            strategy = option(:on_error, :fail)
-            handle_error(strategy, ex, result, attr, value, world)
+          deeper(world, attr) do |w|
+            begin
+              result[attr] = lenses.call(value, w)
+            rescue Monolens::LensError => ex
+              strategy = option(:on_error, :fail)
+              handle_error(strategy, ex, result, attr, value, world)
+            end
           end
         end
         result

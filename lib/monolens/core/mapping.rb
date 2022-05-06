@@ -5,7 +5,7 @@ module Monolens
 
       def call(arg, world = {})
         option(:values, {}).fetch(arg) do
-          raise LensError, "Unrecognized value `#{arg}`" if option(:fail_if_missing)
+          fail!("Unrecognized value `#{arg}`", world) if option(:fail_if_missing)
 
           option(:default)
         end

@@ -4,7 +4,7 @@ module Monolens
       include Lens
 
       def call(arg, world = {})
-        is_array!(arg)
+        is_array!(arg, world)
 
         arg.compact
       end
