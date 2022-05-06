@@ -22,6 +22,8 @@
         firstname: name
   ```
 
+* Add coerce.string, aka toString or to_s
+
 * array.map and object.values now supports an `on_error` option
   with possible values `null`, `skip`, `fail` or `handler`. The
   latter works with an `:error_handler` world entry provided at
