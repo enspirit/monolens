@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+retried = false
+begin
+  require 'monolens'
+  require 'monolens/command'
+rescue LoadError
+  $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
+  to_retry, retried = !retried, true
+  to_retry ? retry : raise
+end
+Monolens::Command.call(ARGV)

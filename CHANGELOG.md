@@ -1,3 +1,7 @@
+## 0.4.0
+
+* Add a monolens commandline tool.
+
 ## 0.3.0 - 2022-05-06
 
 * BREAKING: str.strip fails if input is not a string.

@@ -114,6 +114,8 @@ Anyway, the public interface will cover at least the following:
 
 * Exception classes: `Monolens::Error`, `Monolens::LensError`
 
+* bin/monolens, its args, options and general behavior
+
 Everything else is condidered private and may change any time
 (i.e. even on patch releases).
 

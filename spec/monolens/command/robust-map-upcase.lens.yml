@@ -1,0 +1,7 @@
+---
+version: '1.0'
+lenses:
+- array.map:
+    on_error: handler
+    lenses:
+    - str.upcase

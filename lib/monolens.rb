@@ -5,6 +5,7 @@ module Monolens
   class << self
     require_relative 'monolens/version'
     require_relative 'monolens/error'
+    require_relative 'monolens/error_handler'
     require_relative 'monolens/lens'
 
     def define_namespace(name, impl_module)
@@ -43,6 +44,10 @@ module Monolens
     end
     private :chain
 
+    def file_lens(arg)
+      File.new(arg)
+    end
+
     def leaf_lens(arg)
       namespace_name, lens_name = arg.to_s.split('.')
       factor_lens(namespace_name, lens_name, {})
@@ -50,6 +55,7 @@ module Monolens
     private :leaf_lens
 
     def hash_lens(arg)
+      return file_lens(arg) if arg['version'] || arg[:version]
       raise "Invalid lens #{arg}" unless arg.size == 1
 
       name, options = arg.to_a.first
