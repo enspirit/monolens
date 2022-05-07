@@ -87,6 +87,7 @@ str.upcase        - Converts the input string to uppercase
 
 skip.null         - Aborts the current lens transformation if nil
 
+object.extend     - Adds key/value(s) to the input object
 object.rename     - Rename some keys of the input object
 object.transform  - Applies specific lenses to specific values of the input object
 object.keys       - Applies a lens to all keys of the input object

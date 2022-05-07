@@ -5,6 +5,10 @@
 * Add core.dig that extracts a value using a path. Supports
   the :null and :fail on_missing strategies.
 
+* Add object.extend that adds new key/values on the input
+  object. Supports the :null, :skip, :handler, and :fail
+  on_error strategies.
+
 * object.select now supports an array of keys as defn and
   keeps those keys only.
 

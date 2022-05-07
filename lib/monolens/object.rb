@@ -1,5 +1,10 @@
 module Monolens
   module Object
+    def extend(options)
+      Extend.new(options)
+    end
+    module_function :extend
+
     def rename(parts)
       Rename.new(parts)
     end
@@ -33,3 +38,4 @@ require_relative 'object/transform'
 require_relative 'object/keys'
 require_relative 'object/values'
 require_relative 'object/select'
+require_relative 'object/extend'
