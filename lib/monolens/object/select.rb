@@ -8,7 +8,7 @@ module Monolens
 
         result = {}
         is_symbol = arg.keys.any?{|k| k.is_a?(Symbol) }
-        option(:defn, {}).each_pair do |new_attr, selector|
+        defn.each_pair do |new_attr, selector|
           deeper(world, new_attr) do |w|
             is_array = selector.is_a?(::Array)
             values = []
@@ -27,6 +27,16 @@ module Monolens
           end
         end
         result
+      end
+
+    private
+
+      def defn
+        defn = option(:defn, {})
+        defn = defn.each_with_object({}) do |attr, memo|
+          memo[attr] = attr
+        end if defn.is_a?(::Array)
+        defn
       end
 
       def on_missing(attr, values, world)

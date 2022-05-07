@@ -5,6 +5,9 @@
 * Add core.dig that extracts a value using a path. Supports
   the :null and :fail on_missing strategies.
 
+* object.select now supports an array of keys as defn and
+  keeps those keys only.
+
 ## 0.3.0 - 2022-05-06
 
 * BREAKING: str.strip fails if input is not a string.

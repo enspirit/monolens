@@ -1,7 +1,6 @@
 module Monolens
   module Lens
     module FetchSupport
-
       def fetch_on(attr, arg, default = nil)
         if arg.key?(attr)
           [ attr, arg[attr] ]
@@ -15,7 +14,6 @@ module Monolens
           nil
         end
       end
-
     end
   end
 end

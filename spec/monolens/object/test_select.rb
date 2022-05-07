@@ -75,6 +75,30 @@ describe Monolens, 'object.select' do
     end
   end
 
+  context 'when using an array as selection' do
+    subject do
+      Monolens.lens('object.select' => {
+        defn: [
+          :firstname,
+          :priority
+        ]
+      })
+    end
+
+    it 'works as expected' do
+      input = {
+        firstname: 'Bernard',
+        lastname: 'Lambeau',
+        priority: 12
+      }
+      expected = {
+        firstname: 'Bernard',
+        priority: 12
+      }
+      expect(subject.call(input)).to eql(expected)
+    end
+  end
+
   context 'when a key is missing and no option' do
     subject do
       Monolens.lens('object.select' => {
