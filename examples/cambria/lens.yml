@@ -1,0 +1,26 @@
+---
+version: '1.0'
+lenses:
+- object.extend:
+    defn:
+      category:
+      - core.dig:
+          defn: [labels, 0, name]
+- object.rename:
+    defn:
+      state: status
+      body: description
+- object.transform:
+    defn:
+      status:
+      - core.mapping:
+          values:
+            open: todo
+            closed: done
+- object.select:
+    defn:
+    - id
+    - status
+    - title
+    - description
+    - category
