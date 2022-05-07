@@ -76,6 +76,7 @@ result = lens.call(input)
 ## Available lenses
 
 ```
+core.dig          - Extract from the input value (object or array) using a path.
 core.chain        - Applies a chain of lenses to an input value
 core.mapping      - Converts the input value via a key:value mapping
 
@@ -94,6 +95,7 @@ object.select     - Builds an object by selecting key/values from the input obje
 
 coerce.date       - Coerces the input value to a date
 coerce.datetime   - Coerces the input value to a datetime
+coerce.string     - Coerces the input value to a string (aka to_s)
 
 array.compact     - Removes null from the input array
 array.join        - Joins values of the input array as a string

@@ -2,6 +2,9 @@
 
 * Add a monolens commandline tool.
 
+* Add core.dig that extracts a value using a path. Supports
+  the :null and :fail on_missing strategies.
+
 ## 0.3.0 - 2022-05-06
 
 * BREAKING: str.strip fails if input is not a string.
