@@ -97,6 +97,7 @@ object.select     - Builds an object by selecting key/values from the input obje
 coerce.date       - Coerces the input value to a date
 coerce.datetime   - Coerces the input value to a datetime
 coerce.string     - Coerces the input value to a string (aka to_s)
+coerce.integer    - Coerces the input value to an integer
 
 array.compact     - Removes null from the input array
 array.join        - Joins values of the input array as a string

@@ -9,6 +9,8 @@
   object. Supports the :null, :skip, :handler, and :fail
   on_error strategies.
 
+* Add coerce.integer
+
 * object.select now supports an array of keys as defn and
   keeps those keys only.
 

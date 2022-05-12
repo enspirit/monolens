@@ -5,6 +5,11 @@ module Monolens
     end
     module_function :date
 
+    def integer(options = {})
+      Integer.new(options)
+    end
+    module_function :integer
+
     def datetime(options = {})
       DateTime.new(options)
     end
@@ -20,4 +25,5 @@ module Monolens
 end
 require_relative 'coerce/date'
 require_relative 'coerce/date_time'
+require_relative 'coerce/integer'
 require_relative 'coerce/string'
