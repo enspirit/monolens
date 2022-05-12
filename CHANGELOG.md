@@ -12,6 +12,9 @@
 * object.select now supports an array of keys as defn and
   keeps those keys only.
 
+* coerce.date (resp. coerce.datetime) are idempotent: they
+  return their input if it's already a Date (resp. DateTime)
+
 ## 0.3.0 - 2022-05-06
 
 * BREAKING: str.strip fails if input is not a string.

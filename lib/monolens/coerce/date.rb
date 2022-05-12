@@ -10,6 +10,8 @@ module Monolens
       ]
 
       def call(arg, world = {})
+        return arg if arg.is_a?(::Date)
+
         is_string!(arg, world)
 
         date = nil

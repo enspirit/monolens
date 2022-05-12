@@ -5,6 +5,11 @@ describe Monolens, 'coerce.date' do
     Monolens.lens('coerce.date' => { formats: ['%d/%m/%Y'] })
   end
 
+  it 'returns Date objects unchanged (idempotency)' do
+    input = Date.today
+    expect(subject.call(input)).to be(input)
+  end
+
   it 'coerces valid dates' do
     expect(subject.call('11/12/2022')).to eql(Date.parse('2022-12-11'))
   end
