@@ -2,7 +2,12 @@ require 'spec_helper'
 
 describe Monolens, 'coerce.datetime' do
   subject do
-    Monolens.lens('coerce.datetime' => { formats: ['%d/%m/%Y %H:%M'] })
+    Monolens.lens('coerce.datetime' => {
+    }.merge(options))
+  end
+
+  let(:options) do
+    {}
   end
 
   it 'returns DateTime objects unchanged (idempotency)' do
@@ -10,8 +15,36 @@ describe Monolens, 'coerce.datetime' do
     expect(subject.call(input)).to be(input)
   end
 
-  it 'coerces valid date times' do
-    expect(subject.call('11/12/2022 17:38')).to eql(DateTime.parse('2022-12-11 17:38'))
+  describe 'support for formats' do
+    let(:options) do
+      { formats: ['%d/%m/%Y %H:%M'] }
+    end
+
+    it 'coerces valid date times' do
+      expect(subject.call('11/12/2022 17:38')).to eql(DateTime.parse('2022-12-11 17:38'))
+    end
+  end
+
+  describe 'support for a timezone' do
+    let(:options) do
+      { parser: timezone }
+    end
+
+    let(:now) do
+      ::DateTime.now
+    end
+
+    let(:timezone) do
+      Object.new
+    end
+
+    before do
+      expect(timezone).to receive(:parse).and_return(now)
+    end
+
+    it 'uses it to parse' do
+      expect(subject.call('2022-01-01')).to be(now)
+    end
   end
 
   describe 'error handling' do

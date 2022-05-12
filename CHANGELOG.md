@@ -17,6 +17,16 @@
 * coerce.date (resp. coerce.datetime) are idempotent: they
   return their input if it's already a Date (resp. DateTime)
 
+* BREAKING (?): coerce.datetime now uses DateTime.parse
+  instead of `strptime` when there are no formats proposed.
+
+* coerce.datetime now recognizes a `:parser` option that is
+  used for actual parsing (through `parse` or `strptime`).
+
+  This allows using ActiveRecord's Timezone instances as
+  actual parsers. Note that the result is still a DateTime,
+  as `to_datetime` is called on the result.
+
 ## 0.3.0 - 2022-05-06
 
 * BREAKING: str.strip fails if input is not a string.

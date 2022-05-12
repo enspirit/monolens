@@ -30,12 +30,20 @@ module Monolens
         fail!(first_error.message, world)
       end
 
+    private
+
       def strptime(arg, format = nil)
-        if format.nil?
-          ::DateTime.strptime(arg)
+        parsed = if format.nil?
+          parser.parse(arg)
         else
-          ::DateTime.strptime(arg, format)
+          parser.strptime(arg, format)
         end
+        parsed = parsed.to_datetime if parsed.respond_to?(:to_datetime)
+        parsed
+      end
+
+      def parser
+        option(:parser, ::DateTime)
       end
     end
   end
