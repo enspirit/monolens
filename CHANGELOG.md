@@ -1,4 +1,4 @@
-## 0.4.0
+## 0.4.0 - 2022-05-12
 
 * Add a monolens commandline tool.
 
