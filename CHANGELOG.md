@@ -1,4 +1,4 @@
-## 0.5.0
+## 0.5.0 - 2022-05-13
 
 * BREAKING: core.mapping fails by default when no corresponding
   output is found for an input.
