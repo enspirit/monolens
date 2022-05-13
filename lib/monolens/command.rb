@@ -47,10 +47,19 @@ module Monolens
     end
 
     def read_file(file)
-      content = ::File.read(file)
       case ::File.extname(file)
-      when /json$/ then JSON.parse(content)
-      when /ya?ml$/ then YAML.safe_load(content)
+      when /json$/
+        content = ::File.read(file)
+        JSON.parse(content)
+      when /ya?ml$/
+        content = ::File.read(file)
+        YAML.safe_load(content)
+      when /csv$/
+        require 'bmg'
+        Bmg.csv(file).to_a
+      when /xlsx?$/
+        require 'bmg'
+        Bmg.excel(file).to_a
       else
         fail!("Unable to use #{file}")
       end

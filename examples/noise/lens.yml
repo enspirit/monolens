@@ -1,0 +1,48 @@
+---
+version: '1.0'
+lenses:
+- array.map:
+    on_error: [handler, skip]
+    lenses:
+    - object.values:
+        on_error: keep
+        lenses:
+        - str.strip
+    - object.transform:
+        Firstname: coerce.str
+        Lastname: coerce.str
+    - object.select:
+        defn:
+          title: [Firstname, Lastname]
+          age: Age
+          country: Country
+          createdAt: Created at
+    - object.transform:
+        defn:
+          title:
+          - array.compact
+          - array.join:
+              separator: " "
+          age:
+          - coerce.integer
+          createdAt:
+          - coerce.date:
+              formats: ['%b %d, %y']
+          country:
+          - str.downcase
+          - mapping:
+              fail_if_missing: true
+              values:
+                australia: AU
+                canada: CA
+                belgium: BE
+                mexico: MX
+                norway: NO
+                italy: IT
+                indonesia: ID
+                pakistan: PK
+                austria: AT
+                germany: DE
+                india: IN
+                china: CH
+                new zealand: NZ
