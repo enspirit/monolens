@@ -1,3 +1,12 @@
+## 0.5.0
+
+* BREAKING: core.mapping fails by default when no corresponding
+  output is found for an input.
+
+  `:fail_if_missing` option is no longer supported, and replaced
+  by `:on_missing` that supports `fail`, `null`, `default`
+  and `fallback` strategies.
+
 ## 0.4.0 - 2022-05-12
 
 * Add a monolens commandline tool.

@@ -31,7 +31,7 @@ lenses:
           country:
           - str.downcase
           - mapping:
-              fail_if_missing: true
+              on_missing: fail
               values:
                 australia: AU
                 canada: CA

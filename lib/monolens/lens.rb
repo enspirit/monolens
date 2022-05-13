@@ -11,6 +11,11 @@ module Monolens
     end
     attr_reader :options
 
+    def fail!(msg, world)
+      location = world[:location]&.to_a || []
+      raise Monolens::LensError.new(msg, location)
+    end
+
   protected
 
     def option(name, default = nil)
@@ -57,11 +62,6 @@ module Monolens
       return if arg.is_a?(::Array)
 
       fail!("Array expected, got #{arg.class}", world)
-    end
-
-    def fail!(msg, world)
-      location = world[:location]&.to_a || []
-      raise Monolens::LensError.new(msg, location)
     end
   end
 end
