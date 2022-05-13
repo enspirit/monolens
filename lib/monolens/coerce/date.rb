@@ -27,7 +27,7 @@ module Monolens
           end
         end
 
-        fail!(first_error.message, world)
+        fail!("Invalid date `#{arg}`", world) if first_error
       end
 
       def strptime(arg, format = nil)
