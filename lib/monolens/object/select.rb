@@ -9,20 +9,12 @@ module Monolens
         result = {}
         is_symbol = arg.keys.any?{|k| k.is_a?(Symbol) }
         defn.each_pair do |new_attr, selector|
+          new_attr = is_symbol ? new_attr.to_sym : new_attr.to_s
+
           deeper(world, new_attr) do |w|
-            is_array = selector.is_a?(::Array)
-            values = []
-            Array(selector).each do |old_attr|
-              actual, fetched = fetch_on(old_attr, arg)
-              if actual.nil?
-                on_missing(old_attr, values, w)
-              else
-                values << fetched
-              end
-            end
-            new_attr = is_symbol ? new_attr.to_sym : new_attr.to_s
-            unless values.empty?
-              result[new_attr] = is_array ? values : values.first
+            catch (:skip) do
+              value = do_select(arg, selector, w)
+              result[new_attr] = value
             end
           end
         end
@@ -30,6 +22,42 @@ module Monolens
       end
 
     private
+
+      def do_select(arg, selector, world)
+        if selector.is_a?(::Array)
+          do_array_select(arg, selector, world)
+        else
+          do_single_select(arg, selector, world)
+        end
+      end
+
+      def do_array_select(arg, selector, world)
+        case option(:strategy, :all).to_sym
+        when :all
+          selector.each_with_object([]) do |old_attr, values|
+            catch (:skip) do
+              values << do_single_select(arg, old_attr, world)
+            end
+          end
+        when :first
+          selector.each do |old_attr|
+            actual, fetched = fetch_on(old_attr, arg)
+            return fetched if actual
+          end
+          on_missing(selector.first, [], world).first
+        else
+          raise Monolens::Error, "Unexpected strategy `#{strategy}`"
+        end
+      end
+
+      def do_single_select(arg, selector, world)
+        actual, fetched = fetch_on(selector, arg)
+        if actual.nil?
+          on_missing(selector, [], world).first
+        else
+          fetched
+        end
+      end
 
       def defn
         defn = option(:defn, {})
@@ -47,9 +75,9 @@ module Monolens
         when :null
           values << nil
         when :skip
-          nil
+          throw :skip
         else
-          raise Monolens::Error, "Unexpected missing strategy `#{strategy}`"
+          raise Monolens::Error, "Unexpected on_missing strategy `#{strategy}`"
         end
       end
       private :on_missing

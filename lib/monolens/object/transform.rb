@@ -30,7 +30,7 @@ module Monolens
 
       def on_missing(result, attr, world)
         strategy = option(:on_missing, :fail)
-        case strategy.to_sym
+        case strategy&.to_sym
         when :fail
           fail!("Expected `#{attr}` to be defined", world)
         when :null

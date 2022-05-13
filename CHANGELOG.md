@@ -7,6 +7,13 @@
   by `:on_missing` that supports `fail`, `null`, `default`
   and `fallback` strategies.
 
+* object.select now select a `:strategy` option that affects the
+  behavior when defn values are array.
+
+  When set to 'all' (default), the selection will build an array
+  as output (as before). When set to 'first', the output is the
+  first value for which the key has been found on input.
+
 ## 0.4.0 - 2022-05-12
 
 * Add a monolens commandline tool.
