@@ -1,3 +1,7 @@
+## 0.5.1
+
+* Enhance ErrorHandler (Enumerable).
+
 ## 0.5.0 - 2022-05-13
 
 * BREAKING: core.mapping fails by default when no corresponding
