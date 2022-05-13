@@ -1,4 +1,4 @@
-## 0.5.1
+## 0.5.1 - 2022-05-13
 
 * Enhance ErrorHandler (Enumerable).
 
