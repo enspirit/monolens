@@ -1,11 +1,21 @@
 module Monolens
   class ErrorHandler
+    include Enumerable
+
     def initialize
       @errors = []
     end
 
     def call(error)
       @errors << error
+    end
+
+    def each(&bl)
+      @errors.each(&bl)
+    end
+
+    def size
+      @errors.size
     end
 
     def empty?
