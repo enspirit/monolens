@@ -1,3 +1,8 @@
+## 0.5.2
+
+* Add check.notEmpty lens that throw an error if the input is
+  null or empty
+
 ## 0.5.1 - 2022-05-13
 
 * Enhance ErrorHandler (Enumerable).

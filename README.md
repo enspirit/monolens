@@ -102,6 +102,8 @@ coerce.integer    - Coerces the input value to an integer
 array.compact     - Removes null from the input array
 array.join        - Joins values of the input array as a string
 array.map         - Apply a lens to each member of an Array
+
+check.notEmpty    - Throws an error if the input is null or empty
 ```
 
 ## Public API

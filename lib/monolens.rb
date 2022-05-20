@@ -19,6 +19,7 @@ module Monolens
     require_relative 'monolens/array'
     require_relative 'monolens/object'
     require_relative 'monolens/coerce'
+    require_relative 'monolens/check'
 
     def load_file(file)
       Monolens::File.new(YAML.safe_load(::File.read(file)))
@@ -59,7 +60,7 @@ module Monolens
       raise "Invalid lens #{arg}" unless arg.size == 1
 
       name, options = arg.to_a.first
-      namespace_name, lens_name = if name =~ /^[a-z]+\.[a-z]+$/
+      namespace_name, lens_name = if name =~ /^[a-z]+\.[a-z][a-zA-Z]+$/
         name.to_s.split('.')
       else
         ['core', name]
