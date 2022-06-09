@@ -79,6 +79,7 @@ result = lens.call(input)
 core.dig          - Extract from the input value (object or array) using a path.
 core.chain        - Applies a chain of lenses to an input value
 core.mapping      - Converts the input value via a key:value mapping
+core.literal      - Returns a constant value takens as lens definition
 
 str.strip         - Remove leading and trailing spaces of an input string
 str.split         - Splits the input string as an array

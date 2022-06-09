@@ -10,6 +10,11 @@ module Monolens
     end
     module_function :dig
 
+    def literal(options)
+      Literal.new(options)
+    end
+    module_function :literal
+
     def mapping(options)
       Mapping.new(options)
     end
@@ -21,3 +26,4 @@ end
 require_relative 'core/chain'
 require_relative 'core/dig'
 require_relative 'core/mapping'
+require_relative 'core/literal'

@@ -1,3 +1,7 @@
+## 0.5.3
+
+* Add core.literal lens.
+
 ## 0.5.2 - 2022-05-20
 
 * Add check.notEmpty lens that throw an error if the input is
