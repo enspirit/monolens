@@ -1,3 +1,7 @@
+## 0.5.4
+
+* Add -I and -r options to commandline. They mimic ruby's.
+
 ## 0.5.3 - 2022-06-09
 
 * Add core.literal lens.

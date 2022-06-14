@@ -87,6 +87,12 @@ module Monolens
           stdout.puts "Monolens v#{VERSION} - (c) Enspirit #{Date.today.year}"
           do_exit(0)
         end
+        opts.on('-ILIB', 'Add a folder to ruby load path') do |lib|
+          $LOAD_PATH.unshift(lib)
+        end
+        opts.on('-rLIB', 'Add a ruby require of a lib') do |lib|
+          require(lib)
+        end
         opts.on('-p', '--[no-]pretty', 'Show version and exit') do |pretty|
           @pretty = pretty
         end
