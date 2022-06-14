@@ -1,5 +1,8 @@
 ## 0.5.4
 
+* Add object.allbut lens, that allows removing specific object
+  keys.
+
 * Add -I and -r options to commandline. They mimic ruby's.
 
 * Add --map and --on-error options to commandline. They can be
