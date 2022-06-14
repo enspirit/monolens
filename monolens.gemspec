@@ -14,6 +14,9 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://github.com/enspirit/monolens'
   s.license     = 'MIT'
 
+  s.bindir = "bin"
+  s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
+
   s.add_development_dependency "rake", "~> 13"
   s.add_development_dependency "rspec", "~> 3"
   s.add_development_dependency "path", "~> 2"

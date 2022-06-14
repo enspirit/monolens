@@ -2,6 +2,8 @@
 
 * Add -I and -r options to commandline. They mimic ruby's.
 
+* Add missing binary in the ruby gem.
+
 ## 0.5.3 - 2022-06-09
 
 * Add core.literal lens.
