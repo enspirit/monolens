@@ -1,5 +1,10 @@
 module Monolens
   module Object
+    def allbut(options)
+      Allbut.new(options)
+    end
+    module_function :allbut
+
     def extend(options)
       Extend.new(options)
     end
@@ -33,6 +38,7 @@ module Monolens
     Monolens.define_namespace 'object', self
   end
 end
+require_relative 'object/allbut'
 require_relative 'object/rename'
 require_relative 'object/transform'
 require_relative 'object/keys'
