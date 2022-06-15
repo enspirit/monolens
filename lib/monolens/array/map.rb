@@ -21,26 +21,28 @@ module Monolens
         is_enumerable!(arg, world)
 
         result = []
-        arg.each_with_index do |a, i|
+        arg.each_with_index do |member, i|
           deeper(world, i) do |w|
             begin
-              result << @lenses.call(a, w)
+              result << @lenses.call(member, w)
             rescue Monolens::LensError => ex
               strategy = option(:on_error, :fail)
-              handle_error(strategy, ex, result, world)
+              handle_error(strategy, member, ex, result, world)
             end
           end
         end
         result
       end
 
-      def handle_error(strategy, ex, result, world)
+      def handle_error(strategy, member, ex, result, world)
         strategy = strategy.to_sym unless strategy.is_a?(::Array)
         case strategy
         when ::Array
-          strategy.each{|s| handle_error(s, ex, result, world) }
+          strategy.each{|s| handle_error(s, member, ex, result, world) }
         when :handler
           error_handler!(world).call(ex)
+        when :keep
+          result << member
         when :fail
           raise
         when :null

@@ -58,6 +58,21 @@ describe Monolens, 'array.map' do
     end
   end
 
+  context 'keeping on error' do
+    subject do
+      Monolens.lens('array.map' => {
+        on_error: 'keep',
+        lenses: [ 'str.upcase' ]
+      })
+    end
+
+    it 'skips errors' do
+      input = [12, 'world']
+      expected = [12, 'WORLD']
+      expect(subject.call(input)).to eql(expected)
+    end
+  end
+
   context 'on error with :handler' do
     subject do
       Monolens.lens('array.map' => {

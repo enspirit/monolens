@@ -12,6 +12,9 @@
 * core.mapping now supports a :keep on_error strategy that
   simply return the input key.
 
+* array.map now supports a :keep on_error strategy that simply
+  return keeps input members on which the sub lens fails.
+
 * Add missing binary in the ruby gem.
 
 ## 0.5.3 - 2022-06-09
