@@ -1,13 +1,5 @@
 module Monolens
   module Array
-    # ```
-    # array.map: Array -> Array
-    #   on_error: fail|handler|keep|null|skip|[...] = fail
-    #   lenses: Lens
-    # ```
-    #
-    # This lens applies a sublens to every member of the input
-    # value and collects the result as a new array.
     class Map
       include Lens
 

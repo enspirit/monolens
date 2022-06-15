@@ -6,6 +6,6 @@ namespace :test do
     t.rspec_opts = %w[-I. -Ilib -Ispec --pattern=spec/**/test_*.rb --color .]
   end
 
-  task :all => :"unit"
+  task :all => [:unit]
 end
 task :test => :"test:all"
