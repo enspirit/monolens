@@ -2,6 +2,10 @@
 
 * Add -I and -r options to commandline. They mimic ruby's.
 
+* Add --map and --on-error options to commandline. They can be
+  used to write singular object lenses and easily test them
+  against .csv and .xlsx files.
+
 * Add missing binary in the ruby gem.
 
 ## 0.5.3 - 2022-06-09

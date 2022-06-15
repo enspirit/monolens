@@ -11,9 +11,12 @@ module Monolens
       @stdout = stdout
       @stderr = stderr
       @pretty = false
+      @enclose_map = false
+      @fail_strategy = 'fail'
     end
     attr_reader :argv, :stdin, :stdout, :stderr
     attr_reader :pretty
+    attr_reader :enclose_map, :fail_strategy
 
     def self.call(argv, stdin = $stdin, stdout = $stdout, stderr = $stderr)
       new(argv, stdin, stdout, stderr).call
@@ -26,6 +29,12 @@ module Monolens
       lens, input = read_file(lens), read_file(input)
       error_handler = ErrorHandler.new
       lens = Monolens.lens(lens)
+      lens = Monolens.lens({
+        'array.map' => {
+          'on_error' => ['handler', fail_strategy].compact,
+          'lenses' => lens,
+        }
+      }) if enclose_map
       result = lens.call(input, error_handler: error_handler)
 
       unless error_handler.empty?
@@ -86,6 +95,12 @@ module Monolens
         opts.on('--version', 'Show version and exit') do
           stdout.puts "Monolens v#{VERSION} - (c) Enspirit #{Date.today.year}"
           do_exit(0)
+        end
+        opts.on('--[no-]map', 'Enclose the loaded lens inside an array.map') do |flag|
+          @enclose_map = flag
+        end
+        opts.on('--on-error=STRATEGY', 'Apply a specific strategy on error') do |strategy|
+          @fail_strategy = strategy
         end
         opts.on('-ILIB', 'Add a folder to ruby load path') do |lib|
           $LOAD_PATH.unshift(lib)

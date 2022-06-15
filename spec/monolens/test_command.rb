@@ -101,6 +101,17 @@ module Monolens
       end
     end
 
+    context 'with --map' do
+      let(:argv) do
+        ['--map'] + [FIXTURES/'upcase.lens.yml', FIXTURES/'names.json']
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(reloaded_json).to eql(['BERNARD', 'DAVID'])
+      end
+    end
+
     context 'when yielding an error' do
       let(:argv) do
         [FIXTURES/'map-upcase.lens.yml', FIXTURES/'names-with-null.json']
@@ -110,6 +121,17 @@ module Monolens
         expect(exit_status).to eql(-2)
         expect(stdout.string).to eql('')
         expect(stderr.string).to eql("[1] String expected, got NilClass\n")
+      end
+    end
+
+    context 'when yielding an error with --on-error=skip' do
+      let(:argv) do
+        ['--map', '--on-error=skip', FIXTURES/'upcase.lens.yml', FIXTURES/'names-with-null.json']
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(reloaded_json).to eql(['BERNARD', 'DAVID'])
       end
     end
 
