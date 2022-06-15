@@ -1,5 +1,8 @@
 ## 0.5.4
 
+* BREAKING: core.mapping now takes a `defn` instead of `values`.
+  Backward compatibility is provided but will be removed in 1.0.
+
 * Add object.allbut lens, that allows removing specific object
   keys.
 
