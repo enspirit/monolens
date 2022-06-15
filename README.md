@@ -75,37 +75,36 @@ result = lens.call(input)
 
 ## Available lenses
 
-```
-core.dig          - Extract from the input value (object or array) using a path.
-core.chain        - Applies a chain of lenses to an input value
-core.mapping      - Converts the input value via a key:value mapping
-core.literal      - Returns a constant value takens as lens definition
+* [array.compact](documentation/array/compact.md): Removes null from the input array
+* [array.join](documentation/array/join.md): Joins values of the input array as a string
+* [array.map](documentation/array/map.md): Applies a lens to each member of an array
 
-str.strip         - Remove leading and trailing spaces of an input string
-str.split         - Splits the input string as an array
-str.downcase      - Converts the input string to lowercase
-str.upcase        - Converts the input string to uppercase
+* [check.notEmpty](documentation/check/notEmpty.md): Throws an error if the input is null or empty
 
-skip.null         - Aborts the current lens transformation if nil
+* [coerce.date](documentation/coerce/date.md): Coerces the input value to a date
+* [coerce.datetime](documentation/coerce/datetime.md): Coerces the input value to a datetime
+* [coerce.integer](documentation/coerce/integer.md): Coerces the input value to an integer
+* [coerce.string](documentation/coerce/string.md): Coerces the input value to a string (aka to_s)
 
-object.extend     - Adds key/value(s) to the input object
-object.rename     - Rename some keys of the input object
-object.transform  - Applies specific lenses to specific values of the input object
-object.keys       - Applies a lens to all keys of the input object
-object.values     - Applies a lens to all values of the input object
-object.select     - Builds an object by selecting key/values from the input object
+* [core.chain](documentation/core/chain.md): Applies a chain of lenses to an input value
+* [core.dig](documentation/core/dig.md): Extracts from the input value (object or array) using a path
+* [core.literal](documentation/core/literal.md): Returns a constant value takens as lens definition
+* [core.mapping](documentation/core/mapping.md): Converts the input value via a key:value mapping
 
-coerce.date       - Coerces the input value to a date
-coerce.datetime   - Coerces the input value to a datetime
-coerce.string     - Coerces the input value to a string (aka to_s)
-coerce.integer    - Coerces the input value to an integer
+* [object.allbut](documentation/object/allbut.md): Removes some keys from the input object
+* [object.extend](documentation/object/extend.md): Adds key/value(s) to the input object
+* [object.keys](documentation/object/keys.md): Applies a lens to all keys of the input object
+* [object.rename](documentation/object/rename.md): Renames some keys of the input object
+* [object.select](documentation/object/select.md): Builds an object by selecting key/values from the input object
+* [object.transform](documentation/object/transform.md): Applies specific lenses to specific values of the input object
+* [object.values](documentation/object/values.md): Applies a lens to all values of the input object
 
-array.compact     - Removes null from the input array
-array.join        - Joins values of the input array as a string
-array.map         - Apply a lens to each member of an Array
+* [skip.null](documentation/skip/null.md): Sends a skip message if the input is null
 
-check.notEmpty    - Throws an error if the input is null or empty
-```
+* [str.downcase](documentation/str/downcase.md): Converts the input string to lowercase
+* [str.split](documentation/str/split.md): Splits the input string as an array
+* [str.strip](documentation/str/strip.md): Removes leading and trailing spaces of the input string
+* [str.upcase](documentation/str/upcase.md): Converts the input string to uppercase
 
 ## Public API
 

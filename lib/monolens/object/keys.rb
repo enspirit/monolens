@@ -1,37 +1,5 @@
 module Monolens
   module Object
-    # ```
-    # object.keys: Object -> Object
-    #   lenses: Lens
-    # ```
-    #
-    # This lens transforms all keys of its input object by
-    # using the lenses provided.
-    #
-    # ## Example
-    #
-    # Applying the following lens:
-    #
-    # ```yaml
-    # object.keys:
-    #   lenses:
-    #   - str.upcase
-    #
-    # ```
-    #
-    # to the following input:
-    #
-    # ```yaml
-    # firstname: 'Bernard'
-    # company: 'Enspirit'
-    # ```
-    #
-    # will return:
-    #
-    # ```yaml
-    # FIRSTNAME: 'Bernard'
-    # COMPANY: 'Enspirit'
-    # ```
     class Keys
       include Lens
 

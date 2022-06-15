@@ -1,11 +1,5 @@
 module Monolens
   module Str
-    # ```
-    # str.strip: String -> String
-    # ```
-    #
-    # This lens removes leading and trailing spaces from its
-    # input.
     class Strip
       include Lens
 

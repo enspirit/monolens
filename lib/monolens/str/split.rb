@@ -1,12 +1,5 @@
 module Monolens
   module Str
-    # ```
-    # str.split: String -> Array<String>
-    #   separator: String = ' '
-    # ```
-    #
-    # This lens splits its input string to an array of
-    # strings using a separator.
     class Split
       include Lens
 
