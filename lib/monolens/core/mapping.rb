@@ -1,10 +1,9 @@
 module Monolens
   module Core
     # ```
-    # core.mapping: String -> Any, {
-    #   on_missing: default|fallback|fail|keep|null
+    # core.mapping: String -> Any
+    #   on_missing: default|fallback|fail|keep|null = fail
     #   defn: Object = {}
-    # }
     # ```
     #
     # This lens takes a String as input and looks for the

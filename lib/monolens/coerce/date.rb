@@ -3,9 +3,8 @@ require 'date'
 module Monolens
   module Coerce
     # ```
-    # coerce.date: String|Date -> Date, {
+    # coerce.date: String|Date -> Date
     #   formats: [String|Null] = [null]
-    # }
     # ```
     #
     # This lens takes a String as input and attempts to

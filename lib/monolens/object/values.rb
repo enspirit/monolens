@@ -1,5 +1,38 @@
 module Monolens
   module Object
+    # ```
+    # object.values: Object -> Object
+    #   on_error: fail|handler|keep|null|skip|[...] = fail
+    #   lenses: Lens
+    # ```
+    #
+    # This lens transforms all values of its input object by
+    # using the lenses provided.
+    #
+    # ## Example
+    #
+    # Applying the following lens:
+    #
+    # ```yaml
+    # object.values:
+    #   lenses:
+    #   - str.upcase
+    #
+    # ```
+    #
+    # to the following input:
+    #
+    # ```yaml
+    # firstname: 'Bernard'
+    # company: 'Enspirit'
+    # ```
+    #
+    # will return:
+    #
+    # ```yaml
+    # firstname: 'BERNARD'
+    # company: 'ENSPIRIT'
+    # ```
     class Values
       include Lens
 
@@ -26,16 +59,16 @@ module Monolens
         case strategy
         when ::Array
           strategy.each{|s| handle_error(s, ex, result, attr, value, world) }
-        when :handler
-          error_handler!(world).call(ex)
         when :fail
           raise
+        when :handler
+          error_handler!(world).call(ex)
+        when :keep
+          result[attr] = value
         when :null
           result[attr] = nil
         when :skip
           result.delete(attr)
-        when :keep
-          result[attr] = value
         else
           raise Monolens::Error, "Unexpected error strategy `#{strategy}`"
         end

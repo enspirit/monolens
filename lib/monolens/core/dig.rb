@@ -1,10 +1,9 @@
 module Monolens
   module Core
     # ```
-    # core.dig: Object -> Any, {
-    #   on_missing: null|fail
+    # core.dig: Object -> Any
+    #   on_missing: null|fail = fail
     #   defn: [String] = []
-    # }
     # ```
     #
     # This lens can be used to extract a value along a `defn`

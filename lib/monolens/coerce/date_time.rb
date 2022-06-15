@@ -3,10 +3,9 @@ require 'date'
 module Monolens
   module Coerce
     # ```
-    # coerce.datetime: String|DateTime -> DateTime, {
+    # coerce.datetime: String|DateTime -> DateTime
     #   formats: [String|Null] = [null]
     #   parser: Any(#parse && #strptime) = DateTime
-    # }
     # ```
     #
     # This lens takes a String as input and attempts to

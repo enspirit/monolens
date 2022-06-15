@@ -1,5 +1,41 @@
 module Monolens
   module Object
+    # ```
+    # object.extend: Object -> Object
+    #   on_error: fail|handler|null|skip|[...] = fail
+    #   defn: Object<String -> Lens> = {}
+    # ```
+    #
+    # This lens extends its input object with new key/value
+    # pairs as specified by `defn`. Each pair of the `defn`
+    # associates a new key to a lens that, when evaluated on
+    # the input object, brings the corresponding output value.
+    #
+    # ## Example
+    #
+    # Applying the following lens:
+    #
+    # ```yaml
+    # object.extend:
+    #   defn:
+    #     upcased:
+    #     - core.dig: { defn: [firstname] }
+    #     - str.upcase
+    #
+    # ```
+    #
+    # to the following input:
+    #
+    # ```yaml
+    # firstname: 'Bernard'
+    # ```
+    #
+    # will return:
+    #
+    # ```yaml
+    # firstname: 'Bernard'
+    # upcased: 'BERNARD'
+    # ```
     class Extend
       include Lens
 
@@ -35,10 +71,10 @@ module Monolens
         case strategy
         when ::Array
           strategy.each{|s| handle_error(s, ex, result, attr, world) }
-        when :handler
-          error_handler!(world).call(ex)
         when :fail
           raise
+        when :handler
+          error_handler!(world).call(ex)
         when :null
           result[attr] = nil
         when :skip

@@ -1,5 +1,11 @@
 module Monolens
   module Str
+    # ```
+    # str.downcase: String -> String
+    # ```
+    #
+    # This lens converts its input to the same string but
+    # in lower case.
     class Downcase
       include Lens
 

@@ -3,9 +3,8 @@ require 'date'
 module Monolens
   module Check
     # ```
-    # check.notEmpty: Any -> Any, {
+    # check.notEmpty: Any -> Any
     #   message: String = 'Input may not be empty'
-    # }
     # ```
     #
     # This lens takes an Array, Object or String as input

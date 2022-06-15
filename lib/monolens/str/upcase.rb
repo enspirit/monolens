@@ -1,5 +1,11 @@
 module Monolens
   module Str
+    # ```
+    # str.upcase: String -> String
+    # ```
+    #
+    # This lens converts its input to the same string but
+    # in upper case.
     class Upcase
       include Lens
 
