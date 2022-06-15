@@ -2,6 +2,16 @@ require 'date'
 
 module Monolens
   module Check
+    # ```
+    # check.notEmpty: Any -> Any, {
+    #   message: String = 'Input may not be empty'
+    # }
+    # ```
+    #
+    # This lens takes an Array, Object or String as input
+    # and fails when empty. Otherwise the input is returned.
+    #
+    # The lens also fails if the input is null.
     class NotEmpty
       include Lens
 

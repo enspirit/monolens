@@ -1,5 +1,10 @@
 module Monolens
   module Array
+    # ```
+    # array.compact: Array -> Array
+    # ```
+    #
+    # This lens returns the input without null values.
     class Compact
       include Lens
 

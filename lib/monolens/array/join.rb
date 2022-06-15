@@ -1,5 +1,12 @@
 module Monolens
   module Array
+    # ```
+    # array.join: Array -> String
+    #   separator: String = ' '
+    # ```
+    #
+    # This lens builds a string by concatenating the
+    # values of the input array with a separator.
     class Join
       include Lens
 

@@ -1,5 +1,21 @@
 module Monolens
   module Core
+    # ```
+    # coerce.chain: [Lens] -> Lens
+    # ```
+    #
+    # This lens simply takes a list of sublenses and apply
+    # them in order (functional composition).
+    #
+    # It is mostly implicit when using .yaml files and is used
+    # for constructions like this:
+    #
+    # ```
+    # lenses:
+    # - ...
+    # - ...
+    # ```
+    #
     class Chain
       include Lens
 
