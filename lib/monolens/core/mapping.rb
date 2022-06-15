@@ -14,6 +14,8 @@ module Monolens
       def on_missing(arg, world)
         strategy = option(:on_missing, :fail)
         case strategy.to_sym
+        when :keep
+          arg
         when :fail
           fail!("Unrecognized value `#{arg}`", world)
         when :default

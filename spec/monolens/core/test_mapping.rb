@@ -49,6 +49,20 @@ describe Monolens, 'core.mapping' do
     end
   end
 
+  context 'on_missing: keep' do
+    subject do
+      Monolens.lens('core.mapping' => mapping.merge('on_missing' => 'keep'))
+    end
+
+    it 'replaces the value by its mapped' do
+      expect(subject.call('todo')).to eql('open')
+    end
+
+    it 'returns nil if missing' do
+      expect(subject.call('nosuchone')).to eql('nosuchone')
+    end
+  end
+
   context 'on_missing: fallback' do
     subject do
       Monolens.lens('core.mapping' => mapping.merge(
