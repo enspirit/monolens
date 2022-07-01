@@ -1,8 +1,26 @@
 # Monolens - Declarative data transformation scripts
 
-Monolens implements declarative data transformation
-pipelines. It is inspired by [Project Cambria](https://www.inkandswitch.com/cambria/)
+Monolens implements declarative data transformation pipelines
+expressed as simple .yaml or .json files.
+
+It is inspired by [Project Cambria](https://www.inkandswitch.com/cambria/)
 but is not as ambitious, and is not currently compatible with it.
+
+## Why ?
+
+Too often, as (support) developers we need to clean an Excel
+file, process a .json file, transform data from a .csv file,
+upgrade a .yaml configuration, etc.
+
+It's not a big deal if you know a great scripting language.
+But:
+- error handling is not trivial
+- writing those scripts in a reusable way is not trivial
+- making those scripts available to others (non-developers)
+  is not trivial
+
+Monolens aims at making those things simple, declarative,
+safe, reusable and publicly hosted.
 
 ## Features / Limitations
 
