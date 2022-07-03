@@ -3,24 +3,19 @@ module Monolens
     class Options
       include FetchSupport
 
-      def initialize(options)
-        @options = case options
-        when Hash
-          options.dup
-        else
-          { lenses: options }
-        end
-        actual, lenses = fetch_on(:lenses, @options)
-        @options[actual] = lens(lenses) if actual && lenses
-        @options.freeze
+      def initialize(options, registry)
+        raise ArgumentError if options.nil?
+        raise ArgumentError if registry.nil?
+
+        compile(options, registry)
       end
-      attr_reader :options
-      private :options
+      attr_reader :options, :registry
+      private :options, :registry
 
       NO_DEFAULT = Object.new.freeze
 
       def lens(arg)
-        Monolens.lens(arg)
+        registry.lens(arg)
       end
 
       def fetch(key, default = NO_DEFAULT, on = @options)
@@ -40,6 +35,17 @@ module Monolens
       def to_h
         @options.dup
       end
+
+    private
+
+      def compile(options, registry)
+        @options = options.is_a?(Hash) ? options.dup : { lenses: options }
+        @registry = registry
+
+        actual, lenses = fetch_on(:lenses, @options)
+        @options[actual] = lens(lenses) if actual && lenses
+      end
+
     end
   end
 end

@@ -3,7 +3,7 @@ module Monolens
     class Map
       include Lens
 
-      def initialize(arg)
+      def initialize(arg, registry)
         options, lenses = case arg
         when ::Hash
           opts = arg.dup; opts.delete(:lenses)
@@ -13,7 +13,7 @@ module Monolens
         else
           [{}, arg]
         end
-        super(options)
+        super(options, registry)
         @lenses = lens(lenses)
       end
 

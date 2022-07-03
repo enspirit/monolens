@@ -1,22 +1,22 @@
 module Monolens
   module Str
-    def downcase(options = {})
-      Downcase.new(options)
+    def downcase(options, registry)
+      Downcase.new(options, registry)
     end
     module_function :downcase
 
-    def strip(options = {})
-      Strip.new(options)
+    def strip(options, registry)
+      Strip.new(options, registry)
     end
     module_function :strip
 
-    def split(options = {})
-      Split.new(options)
+    def split(options, registry)
+      Split.new(options, registry)
     end
     module_function :split
 
-    def upcase(options = {})
-      Upcase.new(options)
+    def upcase(options, registry)
+      Upcase.new(options, registry)
     end
     module_function :upcase
 

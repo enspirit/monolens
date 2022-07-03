@@ -3,8 +3,8 @@ module Monolens
     class Transform
       include Lens
 
-      def initialize(options)
-        super(options)
+      def initialize(options, registry)
+        super(options, registry)
         ts = option(:defn, {})
         ts.each_pair do |k,v|
           ts[k] = lens(v)

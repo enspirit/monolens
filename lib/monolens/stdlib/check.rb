@@ -1,7 +1,7 @@
 module Monolens
   module Check
-    def notEmpty(options)
-      NotEmpty.new(options)
+    def notEmpty(options, registry)
+      NotEmpty.new(options, registry)
     end
     module_function :notEmpty
 

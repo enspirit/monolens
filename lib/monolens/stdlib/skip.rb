@@ -1,7 +1,7 @@
 module Monolens
   module Skip
-    def null(options = {})
-      Null.new(options)
+    def null(options, registry)
+      Null.new(options, registry)
     end
     module_function :null
 

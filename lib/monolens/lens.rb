@@ -6,8 +6,11 @@ module Monolens
   module Lens
     include FetchSupport
 
-    def initialize(options = {})
-      @options = Options.new(options)
+    def initialize(options, registry)
+      raise ArgumentError if options.nil?
+      raise ArgumentError unless registry.is_a?(Registry)
+
+      @options = Options.new(options, registry)
     end
     attr_reader :options
 

@@ -1,37 +1,37 @@
 module Monolens
   module Object
-    def allbut(options)
-      Allbut.new(options)
+    def allbut(options, registry)
+      Allbut.new(options, registry)
     end
     module_function :allbut
 
-    def extend(options)
-      Extend.new(options)
+    def extend(options, registry)
+      Extend.new(options, registry)
     end
     module_function :extend
 
-    def rename(parts)
-      Rename.new(parts)
+    def rename(options, registry)
+      Rename.new(options, registry)
     end
     module_function :rename
 
-    def transform(parts)
-      Transform.new(parts)
+    def transform(options, registry)
+      Transform.new(options, registry)
     end
     module_function :transform
 
-    def keys(lens)
-      Keys.new(lens)
+    def keys(options, registry)
+      Keys.new(options, registry)
     end
     module_function :keys
 
-    def values(lens)
-      Values.new(lens)
+    def values(options, registry)
+      Values.new(options, registry)
     end
     module_function :values
 
-    def select(lens)
-      Select.new(lens)
+    def select(options, registry)
+      Select.new(options, registry)
     end
     module_function :select
 

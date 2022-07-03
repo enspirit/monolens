@@ -4,7 +4,7 @@ module Monolens
   module Lens
     describe Options do
       subject do
-        Options.new(input)
+        Options.new(input, STDLIB)
       end
 
       describe 'initialize' do

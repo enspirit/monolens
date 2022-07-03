@@ -1,22 +1,22 @@
 module Monolens
   module Coerce
-    def date(options = {})
-      Date.new(options)
+    def date(options, registry)
+      Date.new(options, registry)
     end
     module_function :date
 
-    def integer(options = {})
-      Integer.new(options)
+    def integer(options, registry)
+      Integer.new(options, registry)
     end
     module_function :integer
 
-    def datetime(options = {})
-      DateTime.new(options)
+    def datetime(options, registry)
+      DateTime.new(options, registry)
     end
     module_function :datetime
 
-    def string(options = {})
-      String.new(options)
+    def string(options, registry)
+      String.new(options, registry)
     end
     module_function :string
 

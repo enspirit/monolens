@@ -3,9 +3,9 @@ module Monolens
     class Chain
       include Lens
 
-      def initialize(lenses)
-        super({})
-        @lenses = lenses
+      def initialize(options, registry)
+        super({}, registry)
+        @lenses = options.map{|l| lens(l) }
       end
 
       def call(arg, world = {})

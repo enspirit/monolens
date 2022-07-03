@@ -1,17 +1,17 @@
 module Monolens
   module Array
-    def compact(options = {})
-      Compact.new(options)
+    def compact(options, registry)
+      Compact.new(options, registry)
     end
     module_function :compact
 
-    def join(options = {})
-      Join.new(options)
+    def join(options, registry)
+      Join.new(options, registry)
     end
     module_function :join
 
-    def map(options)
-      Map.new(options)
+    def map(options, registry)
+      Map.new(options, registry)
     end
     module_function :map
 

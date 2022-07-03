@@ -1,22 +1,22 @@
 module Monolens
   module Core
-    def chain(parts)
-      Chain.new(parts)
+    def chain(options, registry)
+      Chain.new(options, registry)
     end
     module_function :chain
 
-    def dig(options)
-      Dig.new(options)
+    def dig(options, registry)
+      Dig.new(options, registry)
     end
     module_function :dig
 
-    def literal(options)
-      Literal.new(options)
+    def literal(options, registry)
+      Literal.new(options, registry)
     end
     module_function :literal
 
-    def mapping(options)
-      Mapping.new(options)
+    def mapping(options, registry)
+      Mapping.new(options, registry)
     end
     module_function :mapping
 
