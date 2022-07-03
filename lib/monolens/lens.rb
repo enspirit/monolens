@@ -18,6 +18,10 @@ module Monolens
 
   protected
 
+    def lens(*args)
+      options.lens(*args)
+    end
+
     def option(name, default = nil)
       @options.fetch(name, default)
     end

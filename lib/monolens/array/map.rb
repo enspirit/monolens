@@ -14,7 +14,7 @@ module Monolens
           [{}, arg]
         end
         super(options)
-        @lenses = Monolens.lens(lenses)
+        @lenses = lens(lenses)
       end
 
       def call(arg, world = {})

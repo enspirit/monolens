@@ -11,13 +11,17 @@ module Monolens
           { lenses: options }
         end
         actual, lenses = fetch_on(:lenses, @options)
-        @options[actual] = Monolens.lens(lenses) if actual && lenses
+        @options[actual] = lens(lenses) if actual && lenses
         @options.freeze
       end
       attr_reader :options
       private :options
 
       NO_DEFAULT = Object.new.freeze
+
+      def lens(arg)
+        Monolens.lens(arg)
+      end
 
       def fetch(key, default = NO_DEFAULT, on = @options)
         if on.key?(key)

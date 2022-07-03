@@ -7,7 +7,7 @@ module Monolens
         super(options)
         ts = option(:defn, {})
         ts.each_pair do |k,v|
-          ts[k] = Monolens.lens(v)
+          ts[k] = lens(v)
         end
       end
 
