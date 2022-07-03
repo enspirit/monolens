@@ -6,6 +6,7 @@ module Monolens
     require_relative 'monolens/version'
     require_relative 'monolens/error'
     require_relative 'monolens/error_handler'
+    require_relative 'monolens/utils'
     require_relative 'monolens/lens'
 
     def define_namespace(name, impl_module)

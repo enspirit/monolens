@@ -1,7 +1,10 @@
-## 0.5.4
+## 0.6.0
 
-* BREAKING: core.mapping now takes a `defn` instead of `values`.
+* (BREAKING): core.mapping now takes a `defn` instead of `values`.
   Backward compatibility is provided but will be removed in 1.0.
+
+* `core.literal` now supports (simplified) jsonpath interpolation
+  in strings and complex objects.
 
 * Add object.allbut lens, that allows removing specific object
   keys.
