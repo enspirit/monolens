@@ -1,38 +1,60 @@
-# Monolens - Declarative data transformation scripts
+# Monolens - Declarative data transformations
 
-Monolens implements declarative data transformation pipelines
-expressed as simple .yaml or .json files.
+Declarative data transformations expressed as simple .yaml or
+.json files. They are great to
 
-It is inspired by [Project Cambria](https://www.inkandswitch.com/cambria/)
-but is not as ambitious, and is not currently compatible with it.
+- clean an Excel file
+- transform a .json file
+- transform data from a .csv file
+- upgrade a .yaml configuration
+- etc.
 
-## Why ?
-
-Too often, as (support) developers we need to clean an Excel
-file, process a .json file, transform data from a .csv file,
-upgrade a .yaml configuration, etc.
-
-It's not a big deal if you know a great scripting language.
-But:
-- error handling is not trivial
-- writing those scripts in a reusable way is not trivial
-- making those scripts available to others (non-developers)
-  is not trivial
-
-Monolens aims at making those things simple, declarative,
-safe, reusable and publicly hosted.
+Monolens let's you tackle those tasks with small programs that are
+simple, declarative, robust, secure, reusable and sharable.
 
 ## Features / Limitations
 
-* Allows defining common data transformations on scalars
-  (e.g. string, dates), objects and arrays.
 * Declarative & language agnostic
-* Safe (no path to code injection)
+* Allows defining common data transformations on scalars (e.g. string, dates),
+  objects and arrays.
+* Supports (simplified) jsonpath interpolation for selecting and defining
+  objects
+* Secure: not Turing Complete, no code injection, no RegExp DDoS
 
 * Requires ruby >= 2.6
 * There is no validation of lens files for now
+* Not reached 1.0 yet, still experimental
+
+## Getting started
+
+In shell:
+
+```shell
+gem install monolens
+
+monolens --help
+monolens lens.yaml input.json
+```
+
+In ruby:
+
+```ruby
+# Gemfile
+gem 'monolens', '< 1.0'
+```
+
+```ruby
+require 'monolens'
+require 'json'
+
+lens   = Monolens.load_file('lens.yml')
+input  = JSON.parse(File.read('input.json'))
+result = lens.call(input)
+```
 
 ## Example
+
+This section gives a basic example. See the `documentation/` folder for more.
 
 Given the following input file, say `input.json`:
 
@@ -80,49 +102,17 @@ will generate the following result:
 ]
 ```
 
-In ruby:
-
-```ruby
-require 'monolens'
-require 'json'
-
-lens   = Monolens.load_file('lens.yml')
-input  = JSON.parse(File.read('input.json'))
-result = lens.call(input)
-```
-
 ## Available lenses
 
-* [array.compact](documentation/array/compact.md): Removes null from the input array
-* [array.join](documentation/array/join.md): Joins values of the input array as a string
-* [array.map](documentation/array/map.md): Applies a lens to each member of an array
+Check the `documentation/stdlib` folder.
 
-* [check.notEmpty](documentation/check/notEmpty.md): Throws an error if the input is null or empty
+## Credits
 
-* [coerce.date](documentation/coerce/date.md): Coerces the input value to a date
-* [coerce.datetime](documentation/coerce/datetime.md): Coerces the input value to a datetime
-* [coerce.integer](documentation/coerce/integer.md): Coerces the input value to an integer
-* [coerce.string](documentation/coerce/string.md): Coerces the input value to a string (aka to_s)
+* Monolens is inspired by [Project Cambria](https://www.inkandswitch.com/cambria/)
+but is not as ambitious, and is not currently compatible with it.
 
-* [core.chain](documentation/core/chain.md): Applies a chain of lenses to an input value
-* [core.dig](documentation/core/dig.md): Extracts from the input value (object or array) using a path
-* [core.literal](documentation/core/literal.md): Returns a constant value takens as lens definition
-* [core.mapping](documentation/core/mapping.md): Converts the input value via a key:value mapping
-
-* [object.allbut](documentation/object/allbut.md): Removes some keys from the input object
-* [object.extend](documentation/object/extend.md): Adds key/value(s) to the input object
-* [object.keys](documentation/object/keys.md): Applies a lens to all keys of the input object
-* [object.rename](documentation/object/rename.md): Renames some keys of the input object
-* [object.select](documentation/object/select.md): Builds an object by selecting key/values from the input object
-* [object.transform](documentation/object/transform.md): Applies specific lenses to specific values of the input object
-* [object.values](documentation/object/values.md): Applies a lens to all values of the input object
-
-* [skip.null](documentation/skip/null.md): Sends a skip message if the input is null
-
-* [str.downcase](documentation/str/downcase.md): Converts the input string to lowercase
-* [str.split](documentation/str/split.md): Splits the input string as an array
-* [str.strip](documentation/str/strip.md): Removes leading and trailing spaces of the input string
-* [str.upcase](documentation/str/upcase.md): Converts the input string to uppercase
+* The name of some lenses mimic Tutorial D / relational algebra (Date & Darwen).
+  See also [Bmg](https://github.com/enspirit/bmg)
 
 ## Public API
 

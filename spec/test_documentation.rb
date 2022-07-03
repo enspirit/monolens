@@ -28,7 +28,7 @@ def yaml_load(input)
   end
 end
 
-Path.dir.parent.glob('documentation/*/*.md') do |file|
+Path.dir.parent.glob('documentation/**/*.md') do |file|
   #next unless file.to_s =~ /literal/
 
   describe file do
