@@ -43,4 +43,14 @@ describe Monolens do
       expect(subject.call(input)).to eql(expected)
     end
   end
+
+  context 'on macro.yml' do
+    let(:file){ Path.dir/'fixtures/macro.yml' }
+
+    it 'works' do
+      input = [' Monolens ', ' Finitio ', '  Bmg']
+      expected = 'MONOLENS, FINITIO, BMG'
+      expect(subject.call(input)).to eql(expected)
+    end
+  end
 end

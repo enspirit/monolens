@@ -14,7 +14,7 @@ module Monolens
 
       NO_DEFAULT = Object.new.freeze
 
-      def lens(arg)
+      def lens(arg, registry = @registry)
         registry.lens(arg)
       end
 
@@ -40,10 +40,18 @@ module Monolens
 
       def compile(options, registry)
         @options = options.is_a?(Hash) ? options.dup : { lenses: options }
-        @registry = registry
-
+        @registry = compile_macros(@options, registry)
         actual, lenses = fetch_on(:lenses, @options)
         @options[actual] = lens(lenses) if actual && lenses
+      end
+
+      def compile_macros(options, registry)
+        _, macros = fetch_on(:macros, @options)
+        return registry unless macros
+
+        registry.fork('self').tap{|r|
+          r.define_namespace 'self', Macros.new(macros, registry)
+        }
       end
 
     end

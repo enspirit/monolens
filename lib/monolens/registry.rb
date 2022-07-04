@@ -1,7 +1,8 @@
 module Monolens
   class Registry
-    def initialize(registry = {})
+    def initialize(registry = {}, default_namespace = 'core')
       @registry = registry
+      @default_namespace = default_namespace
     end
 
     def define_namespace(name, impl_module)
@@ -25,6 +26,10 @@ module Monolens
       else
         raise Error, "No such lens #{arg} (#{arg.class})"
       end
+    end
+
+    def fork(default_namespace = 'self')
+      Registry.new(@registry.dup, default_namespace)
     end
 
   private

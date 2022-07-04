@@ -9,6 +9,7 @@ module Monolens
   require_relative 'monolens/lens'
   require_relative 'monolens/namespace'
   require_relative 'monolens/registry'
+  require_relative 'monolens/macros'
 
   STDLIB = Registry.new
 
