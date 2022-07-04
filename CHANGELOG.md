@@ -3,23 +3,25 @@
 * (BREAKING): core.mapping now takes a `defn` instead of `values`.
   Backward compatibility is provided but will be removed in 1.0.
 
+* Add support for `macros` in a lens file.
+
 * `core.literal` now supports (simplified) jsonpath interpolation
   in strings and complex objects.
 
-* Add object.allbut lens, that allows removing specific object
+* Add `object.allbut` lens, that allows removing specific object
   keys.
 
-* Add -I and -r options to commandline. They mimic ruby's.
+* Add `-I` and `-r` options to commandline. They mimic ruby's.
 
-* Add --map and --on-error options to commandline. They can be
+* Add `--map` and `--on-error` options to commandline. They can be
   used to write singular object lenses and easily test them
   against .csv and .xlsx files.
 
-* core.mapping now supports a :keep on_error strategy that
-  simply return the input key.
+* `core.mapping` now supports a `keep` strategy for `:on_error`,
+  that simply returns the input key.
 
-* array.map now supports a :keep on_error strategy that simply
-  return keeps input members on which the sub lens fails.
+* `array.map` now supports a `keep` strategy for `:on_error`,
+  that simply keeps input members on which the sub lens fails.
 
 * Add missing binary in the ruby gem.
 

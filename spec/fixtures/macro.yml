@@ -1,0 +1,13 @@
+---
+version: "1.0"
+#
+macros:
+  join_them:
+  - array.map:
+    - str.strip
+    - str.upcase
+  - array.join: { separator: <.separator }
+#
+lenses:
+- join_them:
+    separator: ', '

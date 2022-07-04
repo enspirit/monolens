@@ -43,4 +43,24 @@ describe Monolens do
       expect(subject.call(input)).to eql(expected)
     end
   end
+
+  context 'on macro.yml' do
+    let(:file){ Path.dir/'fixtures/macro.yml' }
+
+    it 'works' do
+      input = [' Monolens ', ' Finitio ', '  Bmg']
+      expected = 'MONOLENS, FINITIO, BMG'
+      expect(subject.call(input)).to eql(expected)
+    end
+  end
+
+  context 'on recursive.yml' do
+    let(:file){ Path.dir/'fixtures/recursive.yml' }
+
+    it 'fails' do
+      expect {
+        subject
+      }.to raise_error(/No such lens core.join_them/)
+    end
+  end
 end

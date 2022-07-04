@@ -15,10 +15,9 @@ simple, declarative, robust, secure, reusable and sharable.
 ## Features / Limitations
 
 * Declarative & language agnostic
-* Allows defining common data transformations on scalars (e.g. string, dates),
-  objects and arrays.
-* Supports (simplified) jsonpath interpolation for selecting and defining
-  objects
+* Allows transforming scalars (e.g. string, dates), objects and arrays.
+* Support for (simplified) jsonpath interpolation when defining objects
+* Support for macros (monolens is an homoiconic language)
 * Secure: not Turing Complete, no code injection, no RegExp DDoS
 
 * Requires ruby >= 2.6
@@ -52,9 +51,14 @@ input  = JSON.parse(File.read('input.json'))
 result = lens.call(input)
 ```
 
+## Documentation
+
+Please refer to the `documentation/` folder for a longer introduction and
+documentation about the available lenses.
+
 ## Example
 
-This section gives a basic example. See the `documentation/` folder for more.
+This section gives a basic example. See the `examples/` folder for more.
 
 Given the following input file, say `input.json`:
 
@@ -101,10 +105,6 @@ will generate the following result:
   }
 ]
 ```
-
-## Available lenses
-
-Check the `documentation/stdlib` folder.
 
 ## Credits
 
