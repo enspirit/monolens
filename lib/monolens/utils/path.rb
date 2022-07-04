@@ -36,7 +36,6 @@ module Monolens
         end
       end
 
-
       def one(input)
         raise NotImplementedError
       end

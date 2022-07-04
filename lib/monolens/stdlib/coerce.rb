@@ -1,5 +1,7 @@
 module Monolens
   module Coerce
+    extend Namespace
+
     def date(options, registry)
       Date.new(options, registry)
     end

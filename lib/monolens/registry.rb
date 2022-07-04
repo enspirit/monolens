@@ -50,17 +50,16 @@ module Monolens
       namespace_name, lens_name = if name =~ /^[a-z]+\.[a-z][a-zA-Z]+$/
         name.to_s.split('.')
       else
-        ['core', name]
+        [@default_namespace, name]
       end
       factor_lens(namespace_name, lens_name, options, registry)
     end
 
     def factor_lens(namespace_name, lens_name, options, registry)
-      namespace = @registry[namespace_name]
-      if namespace&.private_method_defined?(lens_name, false)
-        namespace.send(lens_name, options, registry)
+      if namespace = @registry[namespace_name]
+        namespace.factor_lens(namespace_name, lens_name, options, registry)
       else
-        raise Error, "No such lens #{[namespace_name, lens_name].join('.')}"
+        raise Error, "No such namespace #{namespace_name}"
       end
     end
   end

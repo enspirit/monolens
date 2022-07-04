@@ -6,8 +6,9 @@ module Monolens
   require_relative 'monolens/error'
   require_relative 'monolens/error_handler'
   require_relative 'monolens/utils'
-  require_relative 'monolens/registry'
   require_relative 'monolens/lens'
+  require_relative 'monolens/namespace'
+  require_relative 'monolens/registry'
 
   STDLIB = Registry.new
 

@@ -1,5 +1,7 @@
 module Monolens
   module Str
+    extend Namespace
+
     def downcase(options, registry)
       Downcase.new(options, registry)
     end

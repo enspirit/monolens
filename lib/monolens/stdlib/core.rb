@@ -1,5 +1,7 @@
 module Monolens
   module Core
+    extend Namespace
+
     def chain(options, registry)
       Chain.new(options, registry)
     end

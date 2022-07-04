@@ -1,5 +1,7 @@
 module Monolens
   module Object
+    extend Namespace
+
     def allbut(options, registry)
       Allbut.new(options, registry)
     end

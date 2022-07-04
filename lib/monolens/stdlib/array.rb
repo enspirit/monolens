@@ -1,5 +1,7 @@
 module Monolens
   module Array
+    extend Namespace
+
     def compact(options, registry)
       Compact.new(options, registry)
     end

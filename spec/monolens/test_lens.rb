@@ -28,7 +28,7 @@ describe Monolens, '.lens' do
   it 'raises an error if the lens namespace is not known' do
     expect {
       Monolens.lens('nosuchone.tp')
-    }.to raise_error(Monolens::Error, 'No such lens nosuchone.tp')
+    }.to raise_error(Monolens::Error, 'No such namespace nosuchone')
   end
 
   it 'raises an error if the lens is not known' do

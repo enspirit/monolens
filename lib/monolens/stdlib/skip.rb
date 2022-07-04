@@ -1,5 +1,7 @@
 module Monolens
   module Skip
+    extend Namespace
+
     def null(options, registry)
       Null.new(options, registry)
     end

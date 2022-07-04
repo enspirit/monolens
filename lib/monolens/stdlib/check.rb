@@ -1,5 +1,7 @@
 module Monolens
   module Check
+    extend Namespace
+
     def notEmpty(options, registry)
       NotEmpty.new(options, registry)
     end
