@@ -52,4 +52,22 @@ describe Monolens, "core.literal" do
       expect(lens.call(input)).to eql(expected)
     end
   end
+
+  context 'changing the root symbol' do
+    let(:lens) do
+      Monolens.lens('core.literal' => {
+        defn: {
+          one: '<.foo',
+          interpolate: 'Hello <(.foo)'
+        },
+        jsonpath: { root_symbol: '<' }
+      })
+    end
+
+    it 'keeps working' do
+      input = { foo: 'bar' }
+      expected = { one: 'bar', interpolate: 'Hello bar' }
+      expect(lens.call(input)).to eql(expected)
+    end
+  end
 end
