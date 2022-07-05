@@ -3,6 +3,11 @@ module Monolens
     class Values
       include Lens
 
+      signature(Type::Object, Type::Object, {
+        lenses: [Type::Lenses, false],
+        on_error: [Type::Strategy.error(%w{fail handler keep null skip}), false],
+      })
+
       def call(arg, world = {})
         is_hash!(arg, world)
 

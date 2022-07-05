@@ -3,6 +3,10 @@ module Monolens
     class Split
       include Lens
 
+      signature(Type::String, Type::Array.of(Type::String), {
+        separator: [Type::String, false]
+      })
+
       def call(arg, world = {})
         is_string!(arg, world)
 

@@ -35,7 +35,7 @@ describe Monolens, 'coerce.datetime' do
     end
 
     let(:timezone) do
-      Object.new
+      Struct.new(:parse, :strptime).new(1, 2)
     end
 
     before do

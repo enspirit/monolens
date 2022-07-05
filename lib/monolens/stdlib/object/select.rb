@@ -3,6 +3,15 @@ module Monolens
     class Select
       include Lens
 
+      signature(Type::Object, Type::Object, {
+        strategy: [Type::Strategy.selection(%w{all first}), false],
+        defn: [Type::Any.of(
+          Type::Array.of(Type::Name),
+          Type::Map.of(Type::Name, Type::Any.of(Type::Array.of(Type::Name), Type::Name))
+        ), true],
+        on_missing: [Type::Strategy.missing(%w{fail null skip}), false]
+      })
+
       def call(arg, world = {})
         is_hash!(arg, world)
 

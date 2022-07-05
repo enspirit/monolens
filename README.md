@@ -21,7 +21,6 @@ simple, declarative, robust, secure, reusable and sharable.
 * Secure: not Turing Complete, no code injection, no RegExp DDoS
 
 * Requires ruby >= 2.6
-* There is no validation of lens files for now
 * Not reached 1.0 yet, still experimental
 
 ## Getting started

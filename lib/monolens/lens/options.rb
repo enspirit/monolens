@@ -3,11 +3,14 @@ module Monolens
     class Options
       include FetchSupport
 
-      def initialize(options, registry)
+      def initialize(options, registry, signature)
         raise ArgumentError if options.nil?
         raise ArgumentError if registry.nil?
+        raise ArgumentError if signature.nil?
 
-        compile(options, registry)
+        @signature = signature
+        @registry =  compile_macros(options, registry)
+        @options = @signature.dress_options(options, @registry)
       end
       attr_reader :options, :registry
       private :options, :registry
@@ -38,16 +41,9 @@ module Monolens
 
     private
 
-      def compile(options, registry)
-        @options = options.is_a?(Hash) ? options.dup : { lenses: options }
-        @registry = compile_macros(@options, registry)
-        actual, lenses = fetch_on(:lenses, @options)
-        @options[actual] = lens(lenses) if actual && lenses
-      end
-
       def compile_macros(options, registry)
-        _, macros = fetch_on(:macros, @options)
-        return registry unless macros
+        return registry unless options.is_a?(Hash)
+        return registry unless macros = options[:macros] || options['macros']
 
         registry.fork('self').tap{|r|
           r.define_namespace 'self', Macros.new(macros, registry)

@@ -3,28 +3,20 @@ module Monolens
     class Map
       include Lens
 
-      def initialize(arg, registry)
-        options, lenses = case arg
-        when ::Hash
-          opts = arg.dup; opts.delete(:lenses)
-          _, ls = fetch_on(:lenses, arg)
-          raise ArgumentError, 'Lenses are required' if ls.nil?
-          [ opts, ls ]
-        else
-          [{}, arg]
-        end
-        super(options, registry)
-        @lenses = lens(lenses)
-      end
+      signature(Type::Array, Type::Array, {
+        on_error: [Type::Strategy.error(%w{handler keep fail null skip}), false],
+        lenses: [Type::Lenses, true]
+      })
 
       def call(arg, world = {})
-        is_enumerable!(arg, world)
+        is_array!(arg, world)
 
+        lenses = option(:lenses)
         result = []
         arg.each_with_index do |member, i|
           deeper(world, i) do |w|
             begin
-              result << @lenses.call(member, w)
+              result << lenses.call(member, w)
             rescue Monolens::LensError => ex
               strategy = option(:on_error, :fail)
               handle_error(strategy, member, ex, result, world)

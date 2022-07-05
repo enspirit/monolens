@@ -3,6 +3,8 @@ module Monolens
     class Strip
       include Lens
 
+      signature(Type::String, Type::String)
+
       def call(arg, world = {})
         is_string!(arg, world)
 

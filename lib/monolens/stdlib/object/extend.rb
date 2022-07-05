@@ -3,6 +3,11 @@ module Monolens
     class Extend
       include Lens
 
+      signature(Type::Object, Type::Object, {
+        defn: [Type::Map.of(Type::Name, Type::Lenses), false],
+        on_error: [Type::Strategy.error(%w{fail handler null skip}), false],
+      })
+
       def initialize(options, registry)
         super(options, registry)
         ts = option(:defn, {})

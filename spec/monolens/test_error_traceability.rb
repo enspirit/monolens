@@ -41,7 +41,7 @@ describe Monolens, 'error traceability' do
 
   context 'on array.map => object.values' do
     let(:lens) do
-      Monolens.lens('array.map' => { lenses: { 'object.values' => 'str.upcase' } })
+      Monolens.lens('array.map' => { lenses: { 'object.values' => ['str.upcase'] } })
     end
 
     subject do

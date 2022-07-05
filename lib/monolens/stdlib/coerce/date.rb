@@ -9,6 +9,11 @@ module Monolens
         nil
       ]
 
+      signature(Type::Coercible.to(Type::String), Type::Date, {
+        parser: [Type::DateTimeParser, false],
+        formats: [Type::Array.of(Type::String), false]
+      })
+
       def call(arg, world = {})
         return arg if arg.is_a?(::Date)
 

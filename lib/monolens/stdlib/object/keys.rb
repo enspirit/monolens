@@ -3,6 +3,10 @@ module Monolens
     class Keys
       include Lens
 
+      signature(Type::Object, Type::Object, {
+        lenses: [Type::Lenses, false],
+      })
+
       def call(arg, world = {})
         is_hash!(arg, world)
 

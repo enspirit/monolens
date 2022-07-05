@@ -5,7 +5,7 @@ Extracts from the input value (object or array) using a path.
 ```
 core.dig: Object -> Any
   on_missing: null|fail = fail
-  defn: [String] = []
+  defn: [String|Integer] = []
 ```
 
 This lens can be used to extract a value along a `defn`
