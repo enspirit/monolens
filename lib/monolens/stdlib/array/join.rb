@@ -3,6 +3,10 @@ module Monolens
     class Join
       include Lens
 
+      signature(Type::Array, Type::String, {
+        separator: [Type::String, false]
+      })
+
       def call(arg, world = {})
         is_array!(arg, world)
 

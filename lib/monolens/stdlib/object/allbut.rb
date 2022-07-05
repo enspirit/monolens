@@ -3,6 +3,10 @@ module Monolens
     class Allbut
       include Lens
 
+      signature(Type::Object, Type::Object, {
+        defn: [Type::Array.of(Type::Name), false]
+      })
+
       def call(arg, world = {})
         is_hash!(arg, world)
 

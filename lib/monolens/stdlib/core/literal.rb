@@ -3,6 +3,11 @@ module Monolens
     class Literal
       include Lens
 
+      signature(Type::Any, Type::Any, {
+        defn: [Type::Any, true],
+        jsonpath: [Type::Object, false]
+      })
+
       def initialize(options, registry)
         super(options, registry)
         @root_symbol = extract_jsonpath_root_symbol

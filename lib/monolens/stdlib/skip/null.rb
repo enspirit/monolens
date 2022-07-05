@@ -3,6 +3,8 @@ module Monolens
     class Null
       include Lens
 
+      signature(Type::Any, Type::Any)
+
       def call(arg, world = {})
         throw :skip if arg.nil?
 

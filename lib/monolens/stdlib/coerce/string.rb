@@ -5,6 +5,8 @@ module Monolens
     class String
       include Lens
 
+      signature(Type::Any, Type::String)
+
       def call(arg, world = {})
         arg.to_s
       end

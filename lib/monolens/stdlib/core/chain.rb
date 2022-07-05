@@ -3,6 +3,8 @@ module Monolens
     class Chain
       include Lens
 
+      signature(Type::Any, Type::Any)
+
       def initialize(options, registry)
         super({}, registry)
         @lenses = options.map{|l| lens(l) }

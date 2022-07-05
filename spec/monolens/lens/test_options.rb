@@ -4,7 +4,7 @@ module Monolens
   module Lens
     describe Options do
       subject do
-        Options.new(input, STDLIB)
+        Options.new(input, STDLIB, Signature::MISSING)
       end
 
       describe 'initialize' do
@@ -28,19 +28,7 @@ module Monolens
           it 'converts it to lenses' do
             expect(subject.to_h.keys).to eql([:lenses])
             lenses = subject.to_h[:lenses]
-            expect(lenses).to be_a(Core::Chain)
-          end
-        end
-
-        context('when used with a String') do
-          let(:input) do
-            'str.strip'
-          end
-
-          it 'converts it to lenses' do
-            expect(subject.to_h.keys).to eql([:lenses])
-            lenses = subject.to_h[:lenses]
-            expect(lenses).to be_a(Str::Strip)
+            expect(lenses).to eql(input)
           end
         end
       end

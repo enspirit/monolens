@@ -5,6 +5,7 @@ module Monolens
   require_relative 'monolens/version'
   require_relative 'monolens/error'
   require_relative 'monolens/error_handler'
+  require_relative 'monolens/type'
   require_relative 'monolens/jsonpath'
   require_relative 'monolens/lens'
   require_relative 'monolens/namespace'

@@ -3,6 +3,11 @@ module Monolens
     class Transform
       include Lens
 
+      signature(Type::Object, Type::Object, {
+        defn: [Type::Map.of(Type::Name, Type::Lenses), true],
+        on_missing: [Type::Strategy.missing(%w{fail null skip}), false]
+      })
+
       def initialize(options, registry)
         super(options, registry)
         ts = option(:defn, {})

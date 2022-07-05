@@ -3,6 +3,11 @@ module Monolens
     class Dig
       include Lens
 
+      signature(Type::Diggable, Type::Any, {
+        defn: [Type::Array.of(Type::Any.of(Type::Integer, Type::String)), true],
+        on_missing: [Type::Strategy.missing(%w{fail null}), false]
+      })
+
       def call(arg, world = {})
         option(:defn, []).inject(arg) do |memo, part|
           dig_on(part, memo, world)

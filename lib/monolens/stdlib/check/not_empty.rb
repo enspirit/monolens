@@ -5,6 +5,10 @@ module Monolens
     class NotEmpty
       include Lens
 
+      signature(Type::Emptyable, Type::Emptyable, {
+        message: [Type::String, false]
+      })
+
       def call(arg, world = {})
         if arg.nil?
           do_fail!(arg, world)
