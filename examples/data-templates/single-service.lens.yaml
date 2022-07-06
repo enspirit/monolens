@@ -1,0 +1,14 @@
+--- # single-service.lens.yaml
+core.literal:
+  defn: 
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: $.name
+    spec:
+      selector:
+        app: Monolens-SASS
+      ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 8080

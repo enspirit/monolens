@@ -1,0 +1,3 @@
+--- # multiple-services.input.yaml
+- name: monolens-sass-backend
+- name: monolens-sass-frontend
