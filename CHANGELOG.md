@@ -36,6 +36,9 @@
 * Add `--yaml` (resp. `--json`) options to the commandline, to dump the
   result in yaml (resp. json). The default stays json.
 
+* Add `--stream` option to the commandline, to output each item of the
+  result separately.
+
 * Add missing binary in the ruby gem.
 
 ## 0.5.3 - 2022-06-09

@@ -13,10 +13,11 @@ module Monolens
       @pretty = false
       @enclose = []
       @output_format = :json
+      @stream = false
       @fail_strategy = 'fail'
     end
     attr_reader :argv, :stdin, :stdout, :stderr
-    attr_reader :pretty
+    attr_reader :pretty, :stream
     attr_reader :enclose_map, :fail_strategy
 
     def self.call(argv, stdin = $stdin, stdout = $stdout, stderr = $stderr)
@@ -104,6 +105,9 @@ module Monolens
         opts.on('-y', '--yaml', 'Print output in YAML') do
           @output_format = :yaml
         end
+        opts.on('-s', '--stream', 'Stream mode: output each result item separately') do
+          @stream = true
+        end
         opts.on('-j', '--json', 'Print output in JSON') do
           @output_format = :json
         end
@@ -134,11 +138,26 @@ module Monolens
     def output_result(result)
       output = case @output_format
       when :json
-        pretty ? JSON.pretty_generate(result) : result.to_json
+        output_json(result)
       when :yaml
-        YAML.dump(result)
+        output_yaml(result)
       end
+    end
 
+    def output_json(result)
+      method = pretty ? :pretty_generate : :generate
+      if stream
+        fail!("Stream mode only works with an output Array") unless result.is_a?(::Enumerable)
+        result.each do |item|
+          stdout.puts JSON.send(method, item)
+        end
+      else
+        stdout.puts JSON.send(method, result)
+      end
+    end
+
+    def output_yaml(result)
+      output = stream ? YAML.dump_stream(*result) : YAML.dump(result)
       stdout.puts output
     end
   end

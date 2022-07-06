@@ -127,6 +127,34 @@ module Monolens
       end
     end
 
+    context 'with --yaml and --stream' do
+      let(:argv) do
+        ['--yaml', '--stream'] + file_args
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(stdout.string).to eql(<<~YAML)
+        --- BERNARD
+        --- DAVID
+        YAML
+      end
+    end
+
+    context 'with --json and --stream' do
+      let(:argv) do
+        ['--json', '--stream'] + file_args
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(stdout.string).to eql(<<~JSON)
+        "BERNARD"
+        "DAVID"
+        JSON
+      end
+    end
+
     context 'with --map' do
       let(:argv) do
         ['--map'] + [FIXTURES/'upcase.lens.yml', FIXTURES/'names.json']
