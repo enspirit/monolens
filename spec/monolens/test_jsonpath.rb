@@ -15,6 +15,11 @@ module Monolens
     end
 
     describe 'one' do
+      it 'supports the root object' do
+        got = one('$', { name: 'Monolens' })
+        expect(got).to eql({ name: 'Monolens' })
+      end
+
       it 'supports simplest expressions' do
         got = one('$.name', { name: 'Monolens' })
         expect(got).to eql('Monolens')

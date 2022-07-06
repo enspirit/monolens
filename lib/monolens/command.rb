@@ -11,7 +11,7 @@ module Monolens
       @stdout = stdout
       @stderr = stderr
       @pretty = false
-      @enclose = nil
+      @enclose = []
       @output_format = :json
       @fail_strategy = 'fail'
     end
@@ -84,10 +84,10 @@ module Monolens
           do_exit(0)
         end
         opts.on('-m', '--map', 'Enclose the loaded lens inside an array.map') do
-          @enclose = :map
+          @enclose << :map
         end
         opts.on('-l', '--literal', 'Enclose the loaded lens inside core.literal') do
-          @enclose = :literal
+          @enclose << :literal
         end
         opts.on('--on-error=STRATEGY', 'Apply a specific strategy on error') do |strategy|
           @fail_strategy = strategy
@@ -111,22 +111,22 @@ module Monolens
     end
 
     def build_lens(lens_data)
-      lens_data = case @enclose
-      when :map
-        {
-          'array.map' => {
-            'on_error' => ['handler', fail_strategy].compact,
-            'lenses' => lens_data,
+      lens_data = @enclose.inject(lens_data) do |memo, lens_name|
+        case lens_name
+        when :map
+          {
+            'array.map' => {
+              'on_error' => ['handler', fail_strategy].compact,
+              'lenses' => memo,
+            }
           }
-        }
-      when :literal
-        {
-          'core.literal' => {
-            'defn' => lens_data,
+        when :literal
+          {
+            'core.literal' => {
+              'defn' => memo,
+            }
           }
-        }
-      else
-        lens_data
+        end
       end
       Monolens.lens(lens_data)
     end
