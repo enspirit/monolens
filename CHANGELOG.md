@@ -14,8 +14,12 @@
 * Add `-I` and `-r` options to commandline. They mimic ruby's.
 
 * Add `--map` and `--on-error` options to commandline. They can be
-  used to write singular object lenses and easily test them
-  against .csv and .xlsx files.
+  used to write singular object lenses and easily test them against
+  .csv and .xlsx files.
+
+* Add `--literal` option to the commandline. Handy to "execute" a
+  pure object definition (with jsonpath expressions) against a json
+  file.
 
 * `core.mapping` now supports a `keep` strategy for `:on_error`,
   that simply returns the input key.

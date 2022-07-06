@@ -2,7 +2,7 @@ module Monolens
   class Jsonpath
     def self.one_detect_rx(symbol)
       symbol = "\\" + symbol if symbol == '$'
-      %r{^#{symbol}\.[^\s]+$}
+      %r{^#{symbol}[.\[][^\s]+$}
     end
 
     def self.interpolate_detect_rx(symbol)

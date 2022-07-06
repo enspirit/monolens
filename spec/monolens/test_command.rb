@@ -112,6 +112,17 @@ module Monolens
       end
     end
 
+    context 'with --literal' do
+      let(:argv) do
+        ['--literal'] + [FIXTURES/'literal.yml', FIXTURES/'names.json']
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(reloaded_json).to eql('Bernard David')
+      end
+    end
+
     context 'when yielding an error' do
       let(:argv) do
         [FIXTURES/'map-upcase.lens.yml', FIXTURES/'names-with-null.json']

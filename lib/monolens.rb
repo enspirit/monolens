@@ -1,4 +1,5 @@
 require 'yaml'
+require 'date'
 require 'ostruct'
 
 module Monolens

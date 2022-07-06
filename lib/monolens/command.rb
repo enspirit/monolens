@@ -26,15 +26,9 @@ module Monolens
       lens, input = options.parse!(argv)
       show_help_and_exit if lens.nil? || input.nil?
 
-      lens, input = read_file(lens), read_file(input)
+      lens_data, input = read_file(lens), read_file(input)
+      lens = build_lens(lens_data)
       error_handler = ErrorHandler.new
-      lens = Monolens.lens(lens)
-      lens = Monolens.lens({
-        'array.map' => {
-          'on_error' => ['handler', fail_strategy].compact,
-          'lenses' => lens,
-        }
-      }) if enclose_map
       result = lens.call(input, error_handler: error_handler)
 
       unless error_handler.empty?
@@ -96,8 +90,11 @@ module Monolens
           stdout.puts "Monolens v#{VERSION} - (c) Enspirit #{Date.today.year}"
           do_exit(0)
         end
-        opts.on('--[no-]map', 'Enclose the loaded lens inside an array.map') do |flag|
-          @enclose_map = flag
+        opts.on('-m', '--map', 'Enclose the loaded lens inside an array.map') do
+          @enclose = :map
+        end
+        opts.on('-l', '--literal', 'Enclose the loaded lens inside core.literal') do
+          @enclose = :literal
         end
         opts.on('--on-error=STRATEGY', 'Apply a specific strategy on error') do |strategy|
           @fail_strategy = strategy
@@ -112,6 +109,27 @@ module Monolens
           @pretty = pretty
         end
       end
+    end
+
+    def build_lens(lens_data)
+      lens_data = case @enclose
+      when :map
+        {
+          'array.map' => {
+            'on_error' => ['handler', fail_strategy].compact,
+            'lenses' => lens_data,
+          }
+        }
+      when :literal
+        {
+          'core.literal' => {
+            'defn' => lens_data,
+          }
+        }
+      else
+        lens_data
+      end
+      Monolens.lens(lens_data)
     end
   end
 end
