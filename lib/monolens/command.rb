@@ -11,7 +11,8 @@ module Monolens
       @stdout = stdout
       @stderr = stderr
       @pretty = false
-      @enclose_map = false
+      @enclose = nil
+      @output_format = :json
       @fail_strategy = 'fail'
     end
     attr_reader :argv, :stdin, :stdout, :stderr
@@ -35,15 +36,7 @@ module Monolens
         stderr.puts(error_handler.report)
       end
 
-      if result
-        output = if pretty
-          JSON.pretty_generate(result)
-        else
-          result.to_json
-        end
-
-        stdout.puts output
-      end
+      output_result(result) if result
     rescue Monolens::LensError => ex
       stderr.puts("[#{ex.location.join('/')}] #{ex.message}")
       do_exit(-2)
@@ -108,6 +101,12 @@ module Monolens
         opts.on('-p', '--[no-]pretty', 'Show version and exit') do |pretty|
           @pretty = pretty
         end
+        opts.on('-y', '--yaml', 'Print output in YAML') do
+          @output_format = :yaml
+        end
+        opts.on('-j', '--json', 'Print output in JSON') do
+          @output_format = :json
+        end
       end
     end
 
@@ -130,6 +129,17 @@ module Monolens
         lens_data
       end
       Monolens.lens(lens_data)
+    end
+
+    def output_result(result)
+      output = case @output_format
+      when :json
+        pretty ? JSON.pretty_generate(result) : result.to_json
+      when :yaml
+        YAML.dump(result)
+      end
+
+      stdout.puts output
     end
   end
 end

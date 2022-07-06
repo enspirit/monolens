@@ -56,6 +56,10 @@ module Monolens
       JSON.parse(stdout.string)
     end
 
+    def reloaded_yaml
+      YAML.load(stdout.string)
+    end
+
     context 'with no option nor args' do
       let(:argv) do
         []
@@ -98,6 +102,28 @@ module Monolens
         expect(exit_status).to be_nil
         expect(stdout.string).to match(/^\[\n/)
         expect(reloaded_json).to eql(['BERNARD', 'DAVID'])
+      end
+    end
+
+    context 'with --json' do
+      let(:argv) do
+        ['--json'] + file_args
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(reloaded_json).to eql(['BERNARD', 'DAVID'])
+      end
+    end
+
+    context 'with --yaml' do
+      let(:argv) do
+        ['--yaml'] + file_args
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(reloaded_yaml).to eql(['BERNARD', 'DAVID'])
       end
     end
 

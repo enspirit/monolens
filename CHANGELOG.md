@@ -21,6 +21,9 @@
   pure object definition (with jsonpath expressions) against a json
   file.
 
+* Add `--yaml` (resp. `--json`) options to the commandline, to dump the
+  result in yaml (resp. json). The default stays json.
+
 * `core.mapping` now supports a `keep` strategy for `:on_error`,
   that simply returns the input key.
 
