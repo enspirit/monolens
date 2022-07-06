@@ -1,5 +1,7 @@
 module Monolens
   class Registry
+    LENS_NAME_RX = /^[a-z]+\.[a-z][a-zA-Z\-_]+$/
+
     def initialize(registry = {}, default_namespace = 'core')
       @registry = registry
       @default_namespace = default_namespace
@@ -43,7 +45,7 @@ module Monolens
     end
 
     def leaf_lens(arg, registry)
-      namespace_name, lens_name = arg.to_s.split('.')
+      namespace_name, lens_name = split_lens_name(arg)
       factor_lens(namespace_name, lens_name, {}, registry)
     end
 
@@ -52,11 +54,7 @@ module Monolens
       raise Error, "Invalid lens #{arg}" unless arg.size == 1
 
       name, options = arg.to_a.first
-      namespace_name, lens_name = if name =~ /^[a-z]+\.[a-z][a-zA-Z]+$/
-        name.to_s.split('.')
-      else
-        [@default_namespace, name]
-      end
+      namespace_name, lens_name = split_lens_name(name)
       factor_lens(namespace_name, lens_name, options, registry)
     end
 
@@ -65,6 +63,14 @@ module Monolens
         namespace.factor_lens(namespace_name, lens_name, options, registry)
       else
         raise Error, "No such namespace #{namespace_name}"
+      end
+    end
+
+    def split_lens_name(name)
+      if name =~ LENS_NAME_RX
+        name.to_s.split('.')
+      else
+        [@default_namespace, name]
       end
     end
   end
