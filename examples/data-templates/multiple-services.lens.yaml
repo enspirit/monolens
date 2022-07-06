@@ -1,0 +1,16 @@
+--- # mutiple-service.lens.yaml
+array.map:
+  lenses:
+    core.literal:
+      defn: 
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: $.name
+        spec:
+          selector:
+            app: Monolens-SASS
+          ports:
+            - protocol: TCP
+              port: 80
+              targetPort: 8080
