@@ -1,15 +1,27 @@
 ## 0.6.0
 
-* (BREAKING): core.mapping now takes a `defn` instead of `values`.
-  Backward compatibility is provided but will be removed in 1.0.
-
 * Add support for `macros` in a lens file.
+
+### Lenses
+
+* (BREAKING): `core.mapping` now takes a `defn` instead of `values`.
+  Backward compatibility is provided but will be removed in 1.0.
 
 * `core.literal` now supports (simplified) jsonpath interpolation
   in strings and complex objects.
 
 * Add `object.allbut` lens, that allows removing specific object
   keys.
+
+* `core.mapping` now supports a `keep` strategy for `:on_error`,
+  that simply returns the input key.
+
+* `array.map` now supports a `keep` strategy for `:on_error`,
+  that simply keeps input members on which the sub lens fails.
+
+### Commandline
+
+* (BREAKING): removed the `--no-map` option that makes little sense.
 
 * Add `-I` and `-r` options to commandline. They mimic ruby's.
 
@@ -23,12 +35,6 @@
 
 * Add `--yaml` (resp. `--json`) options to the commandline, to dump the
   result in yaml (resp. json). The default stays json.
-
-* `core.mapping` now supports a `keep` strategy for `:on_error`,
-  that simply returns the input key.
-
-* `array.map` now supports a `keep` strategy for `:on_error`,
-  that simply keeps input members on which the sub lens fails.
 
 * Add missing binary in the ruby gem.
 
