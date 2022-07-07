@@ -1,0 +1,10 @@
+--- # transform-country.lens.yml
+object.transform:
+  defn:
+    country:
+    - core.mapping:
+        defn:
+          Belgium: BE
+          Spain: ES
+          United Kingdom: UK
+          France: FR

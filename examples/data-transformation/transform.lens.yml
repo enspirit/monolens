@@ -1,0 +1,13 @@
+--- # transform.lens.yml
+- object.allbut:
+    defn:
+    - email
+- object.transform:
+    defn:
+      country:
+      - core.mapping:
+          defn:
+            Belgium: BE
+            Spain: ES
+            United Kingdom: UK
+            France: FR
