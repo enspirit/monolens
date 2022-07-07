@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Enspirit SRL",
+    "email": "info@enspirit.be",
+    "country": "Belgium"
+  },
+  {
+    "id": 2,
+    "name": "Klaro Cards",
+    "email": "info@enspirit.be",
+    "country": "Belgium"
+  },
+  {
+    "id": 3,
+    "name": "Quadrabee",
+    "email": "info@quadrabee.com",
+    "country": "Spain"
+  }
+]

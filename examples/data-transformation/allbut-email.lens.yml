@@ -1,0 +1,4 @@
+--- # allbut-email.lens.yml
+object.allbut:
+  defn:
+  - email
