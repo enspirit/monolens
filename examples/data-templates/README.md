@@ -208,7 +208,7 @@ are more used to multiple yaml documents. We've got you covered with the
 Our final (and most natural command) for the job at hand is:
 
 ```shell
-monolens -lmsy single-service.tpl.yaml multiple-service.input.yaml
+monolens -lmsy single-service.tpl.yaml multiple-services.input.yaml
 ```
 
 It correctly generates the following output, that can be fed into `kubectl`.
