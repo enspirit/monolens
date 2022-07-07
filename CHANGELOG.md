@@ -40,7 +40,10 @@
   result separately.
 
 * Add `--override` option to the commandline, to override the input data
-  file with the result of the transformation
+  file with the result of the transformation.
+
+* Add `--stdin` option to the commandline, that takes the input data as .json
+  from stdin instead of the file passed as second argument.
 
 * Add missing binary in the ruby gem.
 

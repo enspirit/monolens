@@ -18,11 +18,12 @@ module Monolens
       @override = false
       #
       @input_file = nil
+      @use_stdin = false
     end
     attr_reader :argv, :stdin, :stdout, :stderr
     attr_reader :pretty, :stream, :override
     attr_reader :enclose_map, :fail_strategy
-    attr_reader :input_file
+    attr_reader :input_file, :use_stdin
 
     def self.call(argv, stdin = $stdin, stdout = $stdout, stderr = $stderr)
       new(argv, stdin, stdout, stderr).call
@@ -30,9 +31,9 @@ module Monolens
 
     def call
       lens, @input_file = options.parse!(argv)
-      show_help_and_exit if lens.nil? || @input_file.nil?
+      show_help_and_exit if lens.nil? || (@input_file.nil? && !use_stdin)
 
-      lens_data, input = read_file(lens), read_file(@input_file)
+      lens_data, input = read_file(lens), read_input
       lens = build_lens(lens_data)
       error_handler = ErrorHandler.new
       result = lens.call(input, error_handler: error_handler)
@@ -45,6 +46,14 @@ module Monolens
     rescue Monolens::LensError => ex
       stderr.puts("[#{ex.location.join('/')}] #{ex.message}")
       do_exit(-2)
+    end
+
+    def read_input
+      if use_stdin
+        JSON.parse(stdin.read)
+      else
+        read_file(@input_file)
+      end
     end
 
     def read_file(file)
@@ -102,6 +111,9 @@ module Monolens
         end
         opts.on('-rLIB', 'Add a ruby require of a lib') do |lib|
           require(lib)
+        end
+        opts.on( '--stdin', 'Takes input data from STDIN') do
+          @use_stdin = true
         end
         opts.on('-p', '--[no-]pretty', 'Show version and exit') do |pretty|
           @pretty = pretty

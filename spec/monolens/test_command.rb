@@ -37,6 +37,10 @@ module Monolens
       [FIXTURES/'map-upcase.lens.yml', FIXTURES/'names.json']
     end
 
+    let(:skip_before) do
+      false
+    end
+
     subject do
       begin
         command.call
@@ -45,7 +49,8 @@ module Monolens
     end
 
     before do
-      (FIXTURES/'overrides.json').write((FIXTURES/'names.json').read)
+      next if skip_before
+
       subject
     end
 
@@ -99,10 +104,39 @@ module Monolens
         ['--override', FIXTURES/'map-upcase.lens.yml', FIXTURES/'overrides.json']
       end
 
+      let(:skip_before) do
+        true
+      end
+
+      before do
+        (FIXTURES/'overrides.json').write((FIXTURES/'names.json').read)
+        subject
+      end
+
       it 'works as expected' do
         expect(exit_status).to be_nil
         expect(stdout.string).to be_empty
         expect((FIXTURES/'overrides.json').load).to eql(['BERNARD', 'DAVID'])
+      end
+    end
+
+    context 'with --stdin instead of a file' do
+      let(:argv) do
+        ['--stdin', FIXTURES/'map-upcase.lens.yml']
+      end
+
+      let(:skip_before) do
+        true
+      end
+
+      before do
+        expect(command).to receive(:read_input).and_return((FIXTURES/'names.json').load)
+        subject
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(reloaded_json).to eql(['BERNARD', 'DAVID'])
       end
     end
 
