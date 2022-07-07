@@ -15,20 +15,24 @@ module Monolens
       @output_format = :json
       @stream = false
       @fail_strategy = 'fail'
+      @override = false
+      #
+      @input_file = nil
     end
     attr_reader :argv, :stdin, :stdout, :stderr
-    attr_reader :pretty, :stream
+    attr_reader :pretty, :stream, :override
     attr_reader :enclose_map, :fail_strategy
+    attr_reader :input_file
 
     def self.call(argv, stdin = $stdin, stdout = $stdout, stderr = $stderr)
       new(argv, stdin, stdout, stderr).call
     end
 
     def call
-      lens, input = options.parse!(argv)
-      show_help_and_exit if lens.nil? || input.nil?
+      lens, @input_file = options.parse!(argv)
+      show_help_and_exit if lens.nil? || @input_file.nil?
 
-      lens_data, input = read_file(lens), read_file(input)
+      lens_data, input = read_file(lens), read_file(@input_file)
       lens = build_lens(lens_data)
       error_handler = ErrorHandler.new
       result = lens.call(input, error_handler: error_handler)
@@ -111,6 +115,9 @@ module Monolens
         opts.on('-j', '--json', 'Print output in JSON') do
           @output_format = :json
         end
+        opts.on('--override', 'Write output back to the input file') do
+          @override = true
+        end
       end
     end
 
@@ -136,29 +143,39 @@ module Monolens
     end
 
     def output_result(result)
-      output = case @output_format
-      when :json
-        output_json(result)
-      when :yaml
-        output_yaml(result)
+      with_output_io do |io|
+        output = case @output_format
+        when :json
+          output_json(result, io)
+        when :yaml
+          output_yaml(result, io)
+        end
       end
     end
 
-    def output_json(result)
+    def with_output_io(&block)
+      if override
+        ::File.open(@input_file, 'w', &block)
+      else
+        block.call(stdout)
+      end
+    end
+
+    def output_json(result, io)
       method = pretty ? :pretty_generate : :generate
       if stream
         fail!("Stream mode only works with an output Array") unless result.is_a?(::Enumerable)
         result.each do |item|
-          stdout.puts JSON.send(method, item)
+          io.puts JSON.send(method, item)
         end
       else
-        stdout.puts JSON.send(method, result)
+        io.puts JSON.send(method, result)
       end
     end
 
-    def output_yaml(result)
+    def output_yaml(result, io)
       output = stream ? YAML.dump_stream(*result) : YAML.dump(result)
-      stdout.puts output
+      io.puts output
     end
   end
 end

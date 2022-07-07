@@ -45,6 +45,7 @@ module Monolens
     end
 
     before do
+      (FIXTURES/'overrides.json').write((FIXTURES/'names.json').read)
       subject
     end
 
@@ -90,6 +91,18 @@ module Monolens
       it 'works as expected' do
         expect(exit_status).to be_nil
         expect(reloaded_json).to eql(['BERNARD', 'DAVID'])
+      end
+    end
+
+    context 'when overriding the input file' do
+      let(:argv) do
+        ['--override', FIXTURES/'map-upcase.lens.yml', FIXTURES/'overrides.json']
+      end
+
+      it 'works as expected' do
+        expect(exit_status).to be_nil
+        expect(stdout.string).to be_empty
+        expect((FIXTURES/'overrides.json').load).to eql(['BERNARD', 'DAVID'])
       end
     end
 

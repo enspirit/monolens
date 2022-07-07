@@ -3,3 +3,4 @@
 /pkg
 /vendor
 Gemfile.lock
+/spec/monolens/command/overrides.json

@@ -39,6 +39,9 @@
 * Add `--stream` option to the commandline, to output each item of the
   result separately.
 
+* Add `--override` option to the commandline, to override the input data
+  file with the result of the transformation
+
 * Add missing binary in the ruby gem.
 
 ## 0.5.3 - 2022-06-09
