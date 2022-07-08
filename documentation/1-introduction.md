@@ -214,7 +214,7 @@ since Monolens (currently) expose limitations to keep the language secure.
 Here are some suggestions to keep reading:
 
 - [Explore the standard library](./stdlib)
-- [Explore the documented examples][./examples]
+- [Explore the documented examples](./use-cases)
 - [TODO: Using the commandline tool](./2-command-line.md)
 - [TODO: Learn about simplified jsonpath](./3-simplified-jsonpath.md)
 - [TODO: Read about how Macros help reusing code](./4-macros.md)
