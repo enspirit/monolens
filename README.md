@@ -23,18 +23,33 @@ simple, declarative, robust, secure, reusable and sharable.
 * Requires ruby >= 2.6
 * Not reached 1.0 yet, still experimental
 
+## Documentation & Examples
+
+Please refer to the `documentation/` folder for a longer introduction,
+documentation of the stdlib, and documented use-cases:
+
+- [Introduction](./documentation/1-introduction.md)
+- [Standard library](./documentation/stdlib)
+- [Use cases](./documentation/use-cases)
+  - [Kubernetes data templates](./documentation/use-cases/data-templates/)
+  - [Migrating database seeds](./documentation/use-cases/data-transformation/)
+
 ## Getting started
 
-In shell:
+### In shell
+
+```
+gem install monolens
+```
+
+Then:
 
 ```shell
-gem install monolens
-
 monolens --help
 monolens lens.yaml input.json
 ```
 
-In ruby:
+### In ruby
 
 ```ruby
 # Gemfile
@@ -48,61 +63,6 @@ require 'json'
 lens   = Monolens.load_file('lens.yml')
 input  = JSON.parse(File.read('input.json'))
 result = lens.call(input)
-```
-
-## Documentation
-
-Please refer to the `documentation/` folder for a longer introduction and
-documentation about the available lenses.
-
-## Example
-
-This section gives a basic example. See the `examples/` folder for more.
-
-Given the following input file, say `input.json`:
-
-```json
-[
-  {
-    "status": "open",
-    "body": " Hello world"
-  },
-  {
-    "status": "closed",
-    "body": " Foo bar baz"
-  }
-]
-```
-
-The following monolens file, say `lens.yml`
-
-```yaml
----
-version: 1.0
-lenses:
-- array.map:
-  - object.transform:
-      status:
-      - str.upcase
-      body:
-      - str.strip
-  - object.rename:
-      body: description
-```
-
-will generate the following result:
-
-```json
-[
-  {
-    "status": "OPEN",
-    "description": "Hello world"
-  },
-  {
-    "status": "CLOSED",
-    "description": "Foo bar baz"
-  }
-]
 ```
 
 ## Credits
