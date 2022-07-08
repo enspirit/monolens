@@ -1,4 +1,4 @@
-## 0.6.0
+## 0.6.0 - 2022-07-08
 
 * Add support for `macros` in a lens file.
 
