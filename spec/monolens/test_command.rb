@@ -181,7 +181,7 @@ module Monolens
 
       it 'works as expected' do
         expect(exit_status).to be_nil
-        expect(stdout.string).to eql(<<~YAML)
+        expect(stdout.string.gsub(/\n\.\.\.$/, '')).to eql(<<~YAML)
         --- BERNARD
         --- DAVID
         YAML
