@@ -129,7 +129,7 @@ use a simple array of lenses as syntactic sugar.
 
 `core.chain` is different from `str.upcase` and `array.join` because it takes
 other lenses as option. This is better known as
-[high-order programming](https://en.wikipedia.org/wiki/Higher-order_programming).
+[higher-order programming](https://en.wikipedia.org/wiki/Higher-order_programming).
 
 In fact, `core.chain` is far from being alone to do that. For instance, the
 program above (that upcases array elements as a comma-seperated string) can
@@ -191,7 +191,7 @@ core.literal:
     version: $.versions[-1]
 ```
 
-will produce the object `{"hello": "Monolens", "versions": 0.6}` as output if
+will produce the object `{"hello": "Monolens", "version": 0.6}` as output if
 `{"name": "Monolens", "versions": [0.5, 0.6]}` is provided as input.
 
 JSONPath can also be used for interpolating strings. For instance the following
@@ -206,8 +206,8 @@ core.literal:
 
 will produce the object `{"say": "Hello Monolens"}` on the same input.
 
-Make sure to ready about [simplified JSONPath](./3-simplified-jsonpath.md)
-since Monolens (currently) expose limitations to keep the language secure.
+Make sure to read about [simplified JSONPath](./3-simplified-jsonpath.md)
+since Monolens (currently) exposes limitations to keep the language secure.
 
 ## Going further
 
