@@ -37,6 +37,11 @@ module Monolens
     end
     module_function :select
 
+    def merge(options, registry)
+      Merge.new(options, registry)
+    end
+    module_function :merge
+
     Monolens.define_namespace 'object', self
   end
 end
@@ -47,3 +52,4 @@ require_relative 'object/keys'
 require_relative 'object/values'
 require_relative 'object/select'
 require_relative 'object/extend'
+require_relative 'object/merge'

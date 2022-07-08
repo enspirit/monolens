@@ -8,6 +8,7 @@ module Monolens
 
     require_relative 'type/any'
     require_relative 'type/array'
+    require_relative 'type/boolean'
     require_relative 'type/callback'
     require_relative 'type/coercible'
     require_relative 'type/emptyable'

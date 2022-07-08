@@ -7,11 +7,14 @@
 * (BREAKING): `core.mapping` now takes a `defn` instead of `values`.
   Backward compatibility is provided but will be removed in 1.0.
 
-* `core.literal` now supports (simplified) jsonpath interpolation
-  in strings and complex objects.
-
 * Add `object.allbut` lens, that allows removing specific object
   keys.
+
+* Add `object.merge` lens, that supports normal and deep merge, as
+  well as controlling priority on shared keys.
+
+* `core.literal` now supports (simplified) jsonpath interpolation
+  in strings and complex objects.
 
 * `core.mapping` now supports a `keep` strategy for `:on_error`,
   that simply returns the input key.

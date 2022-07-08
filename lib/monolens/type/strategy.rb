@@ -20,6 +20,10 @@ module Monolens
         new('missing', valid)
       end
 
+      def self.priority(valid)
+        new('priority', valid)
+      end
+
       def dress(arg, registry, &block)
         case arg
         when ::Symbol
