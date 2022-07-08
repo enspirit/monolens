@@ -69,8 +69,8 @@ them (say).
 
 ## Migrating a single file
 
-Migrating a single file is easy: we just need to remove a field and convert a
-existing one. Two lenses will be used: `object.allbut` (that keeps all but the
+Migrating a single file is easy: we just need to remove a field and convert an
+other one. Two lenses will be used: `object.allbut` (that keeps all but the
 specified keys of its input object) and `object.transform` (that allows
 modifying some key-value pairs).
 
@@ -183,7 +183,7 @@ If you are a *nix user, you know that a pipe is all we need to apply each
 transformation in turn. The `--stdin` option comes handy here:
 
 ```shell
-monolens -mjp --override allbut-email.lens.yml companies.json | monolens -mjp --stdin transform-country.lens.yml
+monolens -mjp allbut-email.lens.yml companies.json | monolens -mjp --stdin transform-country.lens.yml
 ```
 
 will give the following result:
