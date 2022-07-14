@@ -1,0 +1,15 @@
+---
+version: '1.0'
+lenses:
+- array.map:
+    lenses:
+    - core.literal:
+        defn:
+          name: $.name
+examples:
+- input:
+  - name: Monolens
+  - name: Bmg
+  output:
+  - name: Monolens
+  - name: BMG

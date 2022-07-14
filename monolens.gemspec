@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   s.bindir = "bin"
   s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
 
+  s.add_runtime_dependency "minitest", "~> 5.16"
+  s.add_runtime_dependency "paint", "~> 2.3"
   s.add_development_dependency "rake", "~> 13"
   s.add_development_dependency "rspec", "~> 3"
   s.add_development_dependency "path", "~> 2"

@@ -16,14 +16,21 @@ module Monolens
       @stream = false
       @fail_strategy = 'fail'
       @override = false
+      @execute_tests = false
       #
       @input_file = nil
       @use_stdin = false
+      #
+      @use_paint = true
     end
     attr_reader :argv, :stdin, :stdout, :stderr
     attr_reader :pretty, :stream, :override
     attr_reader :enclose_map, :fail_strategy
     attr_reader :input_file, :use_stdin
+    attr_reader :use_paint
+    alias :use_paint? :use_paint
+    attr_reader :execute_tests
+    alias :execute_tests? :execute_tests
 
     def self.call(argv, stdin = $stdin, stdout = $stdout, stderr = $stderr)
       new(argv, stdin, stdout, stderr).call
@@ -31,21 +38,30 @@ module Monolens
 
     def call
       lens, @input_file = options.parse!(argv)
-      show_help_and_exit if lens.nil? || (@input_file.nil? && !use_stdin)
+      show_help_and_exit if lens.nil? || (@input_file.nil? && !use_stdin && !execute_tests?)
 
-      lens_data, input = read_file(lens), read_input
-      lens = build_lens(lens_data)
-      error_handler = ErrorHandler.new
-      result = lens.call(input, error_handler: error_handler)
+      lens = build_lens(read_file(lens))
+      if execute_tests?
+        execute_tests!(lens)
+      else
+        input = read_input
+        error_handler = ErrorHandler.new
+        result = lens.call(input, error_handler: error_handler)
 
-      unless error_handler.empty?
-        stderr.puts(error_handler.report)
+        unless error_handler.empty?
+          stderr.puts(error_handler.report)
+        end
+
+        output_result(result) if result
       end
-
-      output_result(result) if result
     rescue Monolens::LensError => ex
       stderr.puts("[#{ex.location.join('/')}] #{ex.message}")
       do_exit(-2)
+    end
+
+    def execute_tests!(lens)
+      require_relative 'command/tester'
+      Tester.new(self).call(lens)
     end
 
     def read_input
@@ -129,6 +145,12 @@ module Monolens
         end
         opts.on('--override', 'Write output back to the input file') do
           @override = true
+        end
+        opts.on('--test', 'Execute tests embedded in the lens file') do
+          @execute_tests = true
+        end
+        opts.on('--[no-]paint', 'Do (not) paint error messages') do |flag|
+          @use_paint = flag
         end
       end
     end

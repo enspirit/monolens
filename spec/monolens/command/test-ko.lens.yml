@@ -1,0 +1,13 @@
+---
+version: '1.0'
+lenses:
+- str.upcase
+examples:
+- input:
+    Monolens
+  output:
+    Monolens
+- input:
+    Monolens
+  output:
+    MONOLENS

@@ -1,3 +1,14 @@
+## 0.6.1
+
+* Add the possibility to add examples to lens files, with typical
+  input and output data.
+
+* `--test` option to the commandline, that checks that the embedded
+  examples are indeed correct.
+
+* `--[no]-paint` options to the commandline, to enable or disable
+  colors of error messages.
+
 ## 0.6.0 - 2022-07-08
 
 * Add support for `macros` in a lens file.

@@ -235,6 +235,39 @@ module Monolens
       end
     end
 
+    context 'with --paint --test' do
+      let(:argv) do
+        ['--paint', '--test', FIXTURES/'test-ok.lens.yml']
+      end
+
+      it 'works as expected' do
+        expect(stdout.string).to match(/1 test. 1 success, 0 failure, 0 error./)
+        expect(exit_status).to be_nil
+      end
+    end
+
+    context 'with --no-paint --test' do
+      let(:argv) do
+        ['--no-paint', '--test', FIXTURES/'test-ok.lens.yml']
+      end
+
+      it 'works as expected' do
+        expect(stdout.string).to eql(".\n\n1 test. 1 success, 0 failure, 0 error.\n")
+        expect(exit_status).to be_nil
+      end
+    end
+
+    context 'with --no-paint --test with failures' do
+      let(:argv) do
+        ['--no-paint', '--test', FIXTURES/'test-ko.lens.yml']
+      end
+
+      it 'works as expected' do
+        expect(stdout.string).to eql("F.\n\nFailure on example 1:\nExpected: \"Monolens\"\n  Actual: \"MONOLENS\"\n\n2 tests. 1 success, 1 failure, 0 error.\n")
+        expect(exit_status).to eql(-3)
+      end
+    end
+
     context 'when yielding an error' do
       let(:argv) do
         [FIXTURES/'map-upcase.lens.yml', FIXTURES/'names-with-null.json']
