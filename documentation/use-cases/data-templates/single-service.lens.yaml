@@ -1,6 +1,6 @@
 --- # single-service.lens.yaml
 core.literal:
-  defn: 
+  defn:
     apiVersion: v1
     kind: Service
     metadata:

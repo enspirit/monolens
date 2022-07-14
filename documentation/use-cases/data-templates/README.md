@@ -97,7 +97,7 @@ instantiated data as output.
 ```yaml
 --- # single-service.lens.yaml
 core.literal:
-  defn: 
+  defn:
     apiVersion: v1
     kind: Service
     metadata:
@@ -177,7 +177,7 @@ of the data input and collects the result as a new array). In other words, the
 array.map:
   lenses:
     core.literal:
-      defn: 
+      defn:
         apiVersion: v1
         kind: Service
         metadata:
