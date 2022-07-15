@@ -172,7 +172,7 @@ module Monolens
             }
           }
         end
-      end
+      end unless execute_tests?
       Monolens.lens(lens_data)
     end
 

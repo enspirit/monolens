@@ -235,9 +235,9 @@ module Monolens
       end
     end
 
-    context 'with --paint --test' do
+    context 'with --paint --test (ignoring --map, --literal)' do
       let(:argv) do
-        ['--paint', '--test', FIXTURES/'test-ok.lens.yml']
+        ['--map', '--literal', '--paint', '--test', FIXTURES/'test-ok.lens.yml']
       end
 
       it 'works as expected' do
