@@ -1,4 +1,4 @@
-## 0.6.1
+## 0.6.1 - 2022-07-15
 
 * Add the possibility to add examples to lens files, with typical
   input and output data.
