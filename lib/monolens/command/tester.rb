@@ -16,7 +16,7 @@ module Monolens
       attr_accessor :nb_tests, :nb_successes, :nb_errors, :nb_failures
 
       def call(lens)
-        fail!("No tests found") unless lens.is_a?(File)
+        fail!("No tests found (#{lens.class})") unless lens.is_a?(Monolens::File)
 
         self.nb_tests = lens.examples.size
         details = []
@@ -33,7 +33,7 @@ module Monolens
         success = nb_errors == 0 && nb_failures == 0
         stdout.puts(success ? green(last_sentence) : red(last_sentence))
 
-        do_exit(-3) unless success
+        do_exit(1) unless success
       end
 
     private
@@ -83,6 +83,7 @@ module Monolens
         :stdout,
         :stderr,
         :do_exit,
+        :fail!
       ].each do |name|
         define_method(name) do |*args, &bl|
           @command.send(name, *args, &bl)

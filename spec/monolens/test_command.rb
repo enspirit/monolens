@@ -264,7 +264,7 @@ module Monolens
 
       it 'works as expected' do
         expect(stdout.string).to eql("F.\n\nFailure on example 1:\nExpected: \"Monolens\"\n  Actual: \"MONOLENS\"\n\n2 tests. 1 success, 1 failure, 0 error.\n")
-        expect(exit_status).to eql(-3)
+        expect(exit_status).to eql(1)
       end
     end
 
@@ -274,7 +274,7 @@ module Monolens
       end
 
       it 'works as expected' do
-        expect(exit_status).to eql(-2)
+        expect(exit_status).to eql(1)
         expect(stdout.string).to eql('')
         expect(stderr.string).to eql("[1] String expected, got NilClass\n")
       end

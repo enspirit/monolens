@@ -56,7 +56,7 @@ module Monolens
       end
     rescue Monolens::LensError => ex
       stderr.puts("[#{ex.location.join('/')}] #{ex.message}")
-      do_exit(-2)
+      do_exit(1)
     end
 
     def execute_tests!(lens)

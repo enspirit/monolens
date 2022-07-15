@@ -9,6 +9,9 @@
 * `--[no]-paint` options to the commandline, to enable or disable
   colors of error messages.
 
+* The commandline now correctly exits with a status code of 1 when an
+  error occurs.
+
 ## 0.6.0 - 2022-07-08
 
 * Add support for `macros` in a lens file.
