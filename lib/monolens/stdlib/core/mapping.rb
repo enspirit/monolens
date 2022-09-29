@@ -8,12 +8,18 @@ module Monolens
         values: [Type::Object, false],    # deprecated
         default: [Type::Any, false],
         fallback: [Type::Callback, false],
+        key_hash: [Type::Lenses, false],
         on_missing: [Type::Strategy.missing(%w{default fail fallback keep null}), false]
       })
 
       def call(arg, world = {})
+        original_arg = arg
+        if key_hash = option(:key_hash, nil)
+          arg = key_hash.call(arg, world)
+        end
+
         option(:defn, option(:values, {})).fetch(arg) do
-          on_missing(arg, world)
+          on_missing(original_arg, world)
         end
       end
 

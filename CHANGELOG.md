@@ -1,3 +1,7 @@
+## 0.6.2
+
+* Add `key_hash` option to `core.mapping`.
+
 ## 0.6.1 - 2022-07-15
 
 * Add the possibility to add examples to lens files, with typical

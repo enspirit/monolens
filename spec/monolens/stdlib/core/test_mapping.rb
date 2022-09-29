@@ -21,6 +21,47 @@ describe Monolens, 'core.mapping' do
     end
   end
 
+  context 'with key_hash option' do
+    let(:mapping) do
+      {
+        'key_hash' => 'str.downcase',
+        'defn' => { 'todo' => 'open' }
+      }
+    end
+
+    subject do
+      Monolens.lens('core.mapping' => mapping)
+    end
+
+    it 'replaces the value by its mapped' do
+      expect(subject.call('todo')).to eql('open')
+    end
+
+    it 'uses the key_hash before looking for mapping' do
+      expect(subject.call('TODO')).to eql('open')
+    end
+
+    it 'raises if not found' do
+      expect {
+        subject.call('nosuchone')
+      }.to raise_error(Monolens::LensError)
+    end
+
+    context 'with on_missing: keep' do
+      subject do
+        Monolens.lens('core.mapping' => mapping.merge('on_missing' => 'keep'))
+      end
+
+      it 'keeps it if missing' do
+        expect(subject.call('nosuchone')).to eql('nosuchone')
+      end
+
+      it 'keeps the original one, not the key_hashed one' do
+        expect(subject.call('NOSUCHONE')).to eql('NOSUCHONE')
+      end
+    end
+  end
+
   context 'on_missing: default' do
     subject do
       Monolens.lens('core.mapping' => mapping.merge('on_missing' => 'default', 'default' => 'foo'))
