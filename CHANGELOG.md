@@ -1,3 +1,7 @@
+## 0.6.3
+
+* Add `coerce.array`
+
 ## 0.6.2 - 2022-09-29
 
 * Add `key_hash` option to `core.mapping`.
