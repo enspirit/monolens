@@ -12,6 +12,11 @@ module Monolens
     end
     module_function :dig
 
+    def digs(options, registry)
+      Digs.new(options, registry)
+    end
+    module_function :digs
+
     def literal(options, registry)
       Literal.new(options, registry)
     end
@@ -27,5 +32,6 @@ module Monolens
 end
 require_relative 'core/chain'
 require_relative 'core/dig'
+require_relative 'core/digs'
 require_relative 'core/mapping'
 require_relative 'core/literal'
