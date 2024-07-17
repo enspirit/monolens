@@ -1,5 +1,6 @@
 ## 0.6.4
 
+* Add `str.nullIfEmpty` that converts empty string by a null
 * Add a :concat strategy to `object.select`
 
 ## 0.6.3 - 2024-07-09

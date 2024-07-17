@@ -7,6 +7,11 @@ module Monolens
     end
     module_function :downcase
 
+    def nullIfEmpty(options, registry)
+      NullIfEmpty.new(options, registry)
+    end
+    module_function :nullIfEmpty
+
     def strip(options, registry)
       Strip.new(options, registry)
     end
@@ -29,3 +34,4 @@ require_relative 'str/downcase'
 require_relative 'str/strip'
 require_relative 'str/split'
 require_relative 'str/upcase'
+require_relative 'str/null_if_empty'
