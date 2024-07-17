@@ -1,4 +1,4 @@
-## 0.6.4
+## 0.6.4 - 2024-07-17
 
 * Add `str.nullIfEmpty` that converts empty string by a null
 * Add `core.digs`
