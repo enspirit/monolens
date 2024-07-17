@@ -4,7 +4,8 @@ module Monolens
       include Lens
 
       signature(Type::Object, Type::Object, {
-        strategy: [Type::Strategy.selection(%w{all first}), false],
+        strategy: [Type::Strategy.selection(%w{all first concat}), false],
+        separator: [Type::String, false],
         defn: [Type::Any.of(
           Type::Array.of(Type::Name),
           Type::Map.of(Type::Name, Type::Any.of(Type::Array.of(Type::Name), Type::Name))
@@ -41,13 +42,20 @@ module Monolens
       end
 
       def do_array_select(arg, selector, world)
-        case option(:strategy, :all).to_sym
+        case strategy = option(:strategy, :all).to_sym
         when :all
           selector.each_with_object([]) do |old_attr, values|
             catch (:skip) do
               values << do_single_select(arg, old_attr, world)
             end
           end
+        when :concat
+          values = selector.each_with_object([]) do |old_attr, values|
+            catch (:skip) do
+              values << do_single_select(arg, old_attr, world)
+            end
+          end
+          values.join(option(:separator, ' '))
         when :first
           selector.each do |old_attr|
             actual, fetched = fetch_on(old_attr, arg)

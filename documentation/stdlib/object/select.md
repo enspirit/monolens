@@ -6,7 +6,8 @@ object.
 ```
 object.select: Object -> Object
   on_missing: fail|null|skip|[...] = fail
-  strategy: all|first = all
+  strategy: all|first|concat = all
+  separator: String = ' '
   defn: Object<String -> String|[String]> = {}
 ```
 
@@ -22,8 +23,13 @@ depends on the specified strategy:
   values fetched.
 - when 'first', `o` will be mapped to the first non
   null value that is found for a given `i`.
+- when 'concat', `o` will be mapped to a concatanation
+  of values selected by the 'all' strategy, with the
+  separator provided
 
 ## Example
+
+### Default strategy: all
 
 Applying the following lens:
 
@@ -50,5 +56,68 @@ will return:
 ```yaml
 ---
 name: ['Bernard', 'Lambeau']
+company: 'Enspirit SRL'
+```
+
+### With strategy: first
+
+Applying the following lens:
+
+```yaml
+---
+object.select:
+  strategy: first
+  defn:
+    name: ['firstname', 'lastname']
+    company: company
+
+```
+
+to the following input:
+
+```yaml
+---
+firstname: 'Bernard'
+lastname: 'Lambeau'
+company: 'Enspirit SRL'
+```
+
+will return:
+
+```yaml
+---
+name: 'Bernard'
+company: 'Enspirit SRL'
+```
+
+### With strategy: concat
+
+Applying the following lens:
+
+```yaml
+---
+object.select:
+  strategy: concat
+  separator: "\n"
+  defn:
+    name: ['firstname', 'lastname']
+    company: company
+
+```
+
+to the following input:
+
+```yaml
+---
+firstname: 'Bernard'
+lastname: 'Lambeau'
+company: 'Enspirit SRL'
+```
+
+will return:
+
+```yaml
+---
+name: "Bernard\nLambeau"
 company: 'Enspirit SRL'
 ```

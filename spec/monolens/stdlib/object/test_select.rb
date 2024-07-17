@@ -160,6 +160,80 @@ describe Monolens, 'object.select' do
     end
   end
 
+  context 'when using strategy: concat' do
+    subject do
+      Monolens.lens('object.select' => {
+        defn: {
+          name: [:firstname, :lastname],
+          status: :priority
+        },
+        strategy: 'concat',
+        separator: "\n",
+        on_missing: on_missing
+      }.compact)
+    end
+
+    context 'with :skip as on_missing' do
+      let(:on_missing) do
+        :skip
+      end
+
+      it 'works as expected with first only is present' do
+        input = {
+          firstname: 'Bernard',
+          priority: 12
+        }
+        expected = {
+          name: 'Bernard',
+          status: 12
+        }
+        expect(subject.call(input)).to eql(expected)
+      end
+
+      it 'works as expected when second only is present' do
+        input = {
+          lastname: 'Lambeau',
+          priority: 12
+        }
+        expected = {
+          name: 'Lambeau',
+          status: 12
+        }
+        expect(subject.call(input)).to eql(expected)
+      end
+
+      it 'works as expected when both are present' do
+        input = {
+          firstname: 'Bernard',
+          lastname: 'Lambeau',
+          priority: 12
+        }
+        expected = {
+          name: "Bernard\nLambeau",
+          status: 12
+        }
+        expect(subject.call(input)).to eql(expected)
+      end
+    end
+
+    context 'with on_missing: null' do
+      let(:on_missing) do
+        :null
+      end
+
+      it 'works as expected when missing' do
+        input = {
+          priority: 12
+        }
+        expected = {
+          name: "\n",
+          status: 12
+        }
+        expect(subject.call(input)).to eql(expected)
+      end
+    end
+  end
+
   context 'when using an array as selection' do
     subject do
       Monolens.lens('object.select' => {

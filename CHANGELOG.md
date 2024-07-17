@@ -1,3 +1,7 @@
+## 0.6.4
+
+* Add a :concat strategy to `object.select`
+
 ## 0.6.3 - 2024-07-09
 
 * Add `coerce.array`
